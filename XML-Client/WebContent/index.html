@@ -1,17 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="ISO-8859-1">
-	<title>Language Geekinatorizer</title>
+<meta charset="ISO-8859-1">
+<title>Language Geekinatorizer</title>
+<script type="text/javascript" src="jquery-1.11.3.js"></script>
+<script src="scripts.js" type="text/javascript"></script>
+
 </head>
 <body>
-	<h1>Willkommen zum Language Geekinatorizer!</h1>
+	<h1>Welcome to the Language Geekinatorizer!</h1>
 	<div>
-		<p>Das ist ein auf den Daten des Language Science Press fuer den Coding DaVinci Hackathon basiertes Sprachquiz.
-		<p>Das Projekt wurde in Rahmen des Projekts der XML-Technologien Vorlesung entwickelt.
-		<p>Hier gehts zum Quiz!
+		<p>Please select the game mode!</p>
 		<form action="quiz.jsp">
-			<input type="submit" value="To the quiz!">
+			<button name="modeButton" type="submit" value="5">5 questions</button>
+		</form>
+		<form action="quiz.jsp">
+			<button name="modeButton" type="submit" value="10">10 questions</button>
 		</form>
 	</div>
 </body>

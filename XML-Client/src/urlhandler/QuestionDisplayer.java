@@ -13,7 +13,7 @@ public class QuestionDisplayer {
      * TODO Make this fancier
      * @throws Exception
      */
-    public ArrayList<String> showQuestion() throws Exception {
+    public ArrayList<String> showQuestion(int numerOfQuestions) throws Exception {
 
 
      // URL questionURL = new URL("http://localhost:8080/XML-Project/quiz/hello/welcome");
@@ -46,8 +46,9 @@ public class QuestionDisplayer {
      * Main for testing 
      * @param args
      */
+    //TODO: change the call "qd.showQuestion();"; code really necessary?
     public static void main(String[] args) {
-        
+        /*
         QuestionDisplayer qd = new QuestionDisplayer();
         try {
             ArrayList<String> lines = qd.showQuestion();
@@ -56,7 +57,7 @@ public class QuestionDisplayer {
         
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
 }
