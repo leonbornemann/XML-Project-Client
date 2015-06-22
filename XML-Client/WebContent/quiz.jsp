@@ -20,6 +20,7 @@ body {
 	<!-- Imports -->
 	<%@ page import="urlhandler.QuestionDisplayer"%>
 	<%@ page import="java.util.ArrayList"%>
+	<% QuestionDisplayer qd = new QuestionDisplayer(); %>
 
 	<p>
 		<img class="titleDisplay" src="img/header.gif" alt="title">
@@ -31,13 +32,13 @@ body {
 
 				<tr>
 					<td width="350px" height="30px">
-					<font class="textFont textFontSentence"><b>Sentence 1</b></font>
+					<font class="textFont textFontSentence"><b><%=qd.getSentence()%></b></font>
 					</td>
 					<td width="550px" style="padding-left: 30px;"><font class="textFont">spoken in</font></td>
 				</tr>
 				<tr>
 					<td rowspan="2" width="350px" height="200px">
-					<font class="textFont">sentence + translation</font>
+					<font class="textFont"><%=qd.getTranslation() %></font>
 					</td>
 					<td height="130px"><font class="textFont" style="padding-left: 30px;">spoken in answers</font></td>
 				</tr>
@@ -49,22 +50,22 @@ body {
 				</tr>
 				<tr>
 					<td>
-						<input type="submit" class="answerButtons textFont" value="button answers 1" />
+						<input type="submit" class="answerButtons textFont" value='<%=qd.getAnswers().get(0) %>'/>
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<input type="submit" class="answerButtons textFont" value="button answers 2"/>
+						<input type="submit" class="answerButtons textFont" value='<%=qd.getAnswers().get(1) %>'/>
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<input type="submit" class="answerButtons textFont" value="button answers 3"/>
+						<input type="submit" class="answerButtons textFont" value='<%=qd.getAnswers().get(2) %>'/>
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<input type="submit" class="answerButtons textFont" width="350px" height="70px" value="button answers 4"/>
+						<input type="submit" class="answerButtons textFont" width="350px" height="70px" value='<%=qd.getAnswers().get(3) %>'/>
 					</td>
 				</tr>
 			</table>
@@ -73,7 +74,6 @@ body {
 
 	<%
 		String questionNumbers = request.getParameter("modeButton");
-		QuestionDisplayer qd = new QuestionDisplayer();
 		ArrayList<String> lines = qd.showQuestion(Integer
 				.parseInt(questionNumbers));
 	%>

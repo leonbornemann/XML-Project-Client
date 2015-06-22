@@ -4,8 +4,13 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 
 public class QuestionDisplayer {
+	
+	private String sentence;
+	private String translation;
+	private List<String> answers;
 
     /**
      * Queries the server (through a URL) for a question
@@ -42,7 +47,36 @@ public class QuestionDisplayer {
         
     }
     
-    /**
+    public String getSentence() {
+		return "Peter wusch die Füße seines Sohns.";
+	}
+
+	public void setSentence(String sentence) {
+		this.sentence = sentence;
+	}
+
+	public String getTranslation() {
+		return "Paul washed his son’s feet.";
+	}
+
+	public void setTranslation(String translation) {
+		this.translation = translation;
+	}
+
+	public List<String> getAnswers() {
+		List<String> answers = new ArrayList<String>();
+		answers.add("German");
+		answers.add("English");
+		answers.add("Finnish");
+		answers.add("Polish");
+		return answers;
+	}
+
+	public void setAnswers(List<String> answers) {
+		this.answers = answers;
+	}
+
+	/**
      * Main for testing 
      * @param args
      */
@@ -59,5 +93,7 @@ public class QuestionDisplayer {
             e.printStackTrace();
         }*/
     }
+    
+    
 
 }
