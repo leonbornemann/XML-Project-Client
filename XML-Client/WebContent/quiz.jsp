@@ -27,32 +27,45 @@ body {
 
 	<div class="mapDisplay">
 		<div class="containerDisplayQuiz">
-			<table border="1">
+			<table style="margin-left:50px;">
 
 				<tr>
-					<td width="400px" height="30px">Sentence 01</td>
-					<td width="600px">spoken in</td>
+					<td width="350px" height="30px">
+					<font class="textFont textFontSentence"><b>Sentence 1</b></font>
+					</td>
+					<td width="550px" style="padding-left: 30px;"><font class="textFont">spoken in</font></td>
 				</tr>
 				<tr>
-					<td rowspan="2" width="400px" height="200px">sentence +
-						translation</td>
-					<td height="130px">spoken in answers</td>
+					<td rowspan="2" width="350px" height="200px">
+					<font class="textFont">sentence + translation</font>
+					</td>
+					<td height="130px"><font class="textFont" style="padding-left: 30px;">spoken in answers</font></td>
 				</tr>
 				<tr>
 					<!-- empty -->
-					<td rowspan="5">map</td>
+					<td rowspan="5" style="padding-left: 30px;">
+						<img src="img/map.png" height="300px"/>
+					</td>
 				</tr>
 				<tr>
-					<td width="400px" height="70px">button answers 1</td>
+					<td>
+						<input type="submit" class="answerButtons textFont" value="button answers 1" />
+					</td>
 				</tr>
 				<tr>
-					<td width="400px" height="70px">button answers 2</td>
+					<td>
+						<input type="submit" class="answerButtons textFont" value="button answers 2"/>
+					</td>
 				</tr>
 				<tr>
-					<td width="400px" height="70px">button answers 3</td>
+					<td>
+						<input type="submit" class="answerButtons textFont" value="button answers 3"/>
+					</td>
 				</tr>
 				<tr>
-					<td width="400px" height="70px">button answers 4</td>
+					<td>
+						<input type="submit" class="answerButtons textFont" width="350px" height="70px" value="button answers 4"/>
+					</td>
 				</tr>
 			</table>
 		</div>

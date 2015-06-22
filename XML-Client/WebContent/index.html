@@ -36,17 +36,14 @@ body {
 					<tr>
 						<td>
 							<form action="quiz.jsp" method="POST">
-								<input type="hidden" name="modeButton" value="5"> <input
-									type="image" src="img/buttonNotPressed.png"
-									onmousedown=changeImage(this)>
-								<div class="textButtons">5 sentences</div>
+								<input type="hidden" name="modeButton" value="5">
+								<input type="submit" style="width:200px; height: 50px" value="5 sentences">
 							</form>
 						</td>
-						<td><form action="quiz.jsp" method="POST">
-								<input type="hidden" name="modeButton" value="10"> <input
-									type="image" src="img/buttonNotPressed.png"
-									onmousedown=changeImage(this)>
-								<div class="textButtons">10 sentences</div>
+						<td>
+							<form action="quiz.jsp" method="POST">
+								<input type="hidden" name="modeButton" value="10">
+								<input type="submit" style="width:200px; height: 50px;" value="10 sentences">
 							</form></td>
 					</tr>
 				</table>

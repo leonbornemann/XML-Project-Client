@@ -29,8 +29,10 @@ img.titleDisplay {
 	height: 550px;
 	margin-left: auto;
 	margin-right: auto;
+	padding-top: 50px;
 	display: block;
 	background: url(img/boxQuiz.png) no-repeat;
+	
 }
 
 .mapDisplay .containerDisplay .textHeader {
@@ -62,4 +64,20 @@ img.titleDisplay {
 .mapDisplay .containerDisplay table {
 	margin: 0 auto;
 	text-align: left;
+}
+
+.answerButtons {
+	height: 50px;
+	width: 320px;
+}
+
+.textFont {
+	font-family: Arial;
+	color: darkblue;
+	font-size: 18px;
+}
+
+.textFontSentence {
+	font-size: 24px !important;
+	font-style: italic;
 }
