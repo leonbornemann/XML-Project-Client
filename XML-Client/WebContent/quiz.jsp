@@ -32,12 +32,14 @@ body {
 
 				<tr>
 					<td width="350px" height="30px">
-					<font class="textFont textFontSentence"><b><%=qd.getSentence()%></b></font>
+					<font class="textFont textFontSentence"><b>Sentence 01</b></font>
 					</td>
 					<td width="550px" style="padding-left: 30px;"><font class="textFont">spoken in</font></td>
 				</tr>
 				<tr>
 					<td rowspan="2" width="350px" height="200px">
+					<font class="textFont textFontSentence"><b><%=qd.getSentence()%></b></font>
+					<p>
 					<font class="textFont"><%=qd.getTranslation() %></font>
 					</td>
 					<td height="130px"><font class="textFont" style="padding-left: 30px;">spoken in answers</font></td>
@@ -71,26 +73,5 @@ body {
 			</table>
 		</div>
 	</div>
-
-	<%
-		String questionNumbers = request.getParameter("modeButton");
-		ArrayList<String> lines = qd.showQuestion(Integer
-				.parseInt(questionNumbers));
-	%>
-	<%
-		for (String s : lines) {
-	%>
-
-	<br>
-	<div class="question">
-		<p><%=s%>
-	</div>
-
-	<br>
-
-	<%
-		}
-	%>
-
 </body>
 </html>
