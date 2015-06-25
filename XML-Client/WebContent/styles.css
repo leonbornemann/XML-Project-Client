@@ -32,7 +32,6 @@ img.titleDisplay {
 	padding-top: 25px;
 	display: block;
 	background: url(img/boxQuiz.png) no-repeat;
-	
 }
 
 .mapDisplay .containerDisplay .textHeader {
@@ -72,12 +71,33 @@ img.titleDisplay {
 }
 
 .textFont {
-	font-family: Arial;
+	font-family: Verdana;
 	color: darkblue;
 	font-size: 18px;
 }
 
 .textFontSentence {
-	font-size: 24px !important;
+	font-size: 20px !important;
 	font-style: italic;
+}
+
+.tableLeftSide {
+	width: 355px;
+	text-align: center;
+}
+
+.firstRow {
+	height: 15px;
+	vertical-align: middle;
+}
+
+.secondRow {
+	height: 200px;
+}
+
+.headlineTextFont {
+	font-size: 24px;
+	font-style: italic;
+	font-family: Verdana;
+	color: darkblue;
 }

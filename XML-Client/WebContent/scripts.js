@@ -1,12 +1,15 @@
 $(document).ready(function() {
-	/* Hier der jQuery-Code */
-	function changeImage(img) 
-	{
-		alert("HAALLOO")
-	   if(img.src.match(/blank/)) img.src = "img/buttonPressed.png";
-	   else img.src = "img/buttonPressed.png";
-	}
-	
-	
-	
+	$(":button").click(function(event) {
+		var e = 0;
+		if ($(this).prop("id") == "answerButton1") {
+
+			alert($(this).prop("value"));
+		} else if ($(this).prop("name") == "modeButton") {
+			alert($(this).prop("value"));
+		} else {
+			alert($(this).prop("name"));
+		}
+
+	});
+
 });
