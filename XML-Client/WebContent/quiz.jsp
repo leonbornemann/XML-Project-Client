@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<html prefix="dbp-owl: http://dbpedia.org/ontology/">
 <head>
 <link rel="stylesheet" href="styles.css">
 <link rel="stylesheet" href="buttonStyle.css">
@@ -60,8 +60,19 @@ body {
 						class="textFont textFontSentence"><b><%=qd.getSentence()%></b></font>
 						<p>
 							<font class="textFont">Translation: <%=qd.getTranslation()%></font></td>
-					<td height="130px"><font class="textFont"
-						style="padding-left: 30px;">spoken in answers</font></td>
+					<td height="130px">
+					<div about="http://dbpedia.org/resource/<%=qd.getCorrectAnswerString()+"_language" %>>">
+					<ul>
+					<%for (String country :  qd.getSpokenInList()){ %>
+					<li>
+						<div rel="dbp-owl:spokenIn" resource="http://dbpedia.org/resource/<%=country%>">
+							<font class="textFont"
+								style="padding-left: 30px;"><%=country %></font>
+						</div>
+					</li>
+					<%} %>
+					</ul>
+					</div>
 				</tr>
 				<tr>
 					<!-- empty -->

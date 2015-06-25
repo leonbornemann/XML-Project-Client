@@ -16,6 +16,9 @@ public class QuestionDisplayer {
 	private String sentence;
 	private String translation;
 	private List<String> answers;
+	
+	private String correctAnswerString;
+	
 
 	private int currentSentenceCounter = 0;
 	private int gameMode = 0;
@@ -24,6 +27,15 @@ public class QuestionDisplayer {
 	private List<String> translations;
 	private List<Integer> correctAnswer;
 	private List<List<String>> answersList;
+	private List<String> spokenInList;
+
+	public List<String> getSpokenInList() {
+		return spokenInList;
+	}
+
+	public void setSpokenInList(List<String> spokenInList) {
+		this.spokenInList = spokenInList;
+	}
 
 	public void test() {
 		// Test
@@ -43,6 +55,7 @@ public class QuestionDisplayer {
 		answers.add("Finnish");
 		answers.add("Polish");
 		answersList.add(answers);
+		
 		answers = new ArrayList<String>();
 		answers.add("English");
 		answers.add("Czech");
@@ -53,6 +66,10 @@ public class QuestionDisplayer {
 		correctAnswer = new ArrayList<Integer>();
 		correctAnswer.add(1);
 		correctAnswer.add(3);
+		
+		spokenInList = new ArrayList<String>();
+		spokenInList.add("Germany");
+		spokenInList.add("Poland");
 
 		// Test Ende
 	}
@@ -110,6 +127,8 @@ public class QuestionDisplayer {
 		return "" + (correctAnswersGiven);
 	}
 
+	
+	
 	public void setCorrAnswersGiven(String counter) {
 		this.correctAnswersGiven = Integer.parseInt(counter);
 	}
@@ -151,6 +170,14 @@ public class QuestionDisplayer {
 		this.answers = answers;
 	}
 
+	public String getCorrectAnswerString() {
+		return answersList.get(currentSentenceCounter).get(correctAnswersGiven);
+	}
+
+	public void setCorrectAnswerString(String correctAnswerString) {
+		this.correctAnswerString = correctAnswerString;
+	}
+	
 	public void hello() {
 		System.out.println("HHHEEELLLLLOOO");
 	}
