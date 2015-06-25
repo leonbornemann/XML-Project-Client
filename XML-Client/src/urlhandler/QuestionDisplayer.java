@@ -18,6 +18,8 @@ public class QuestionDisplayer {
 	private List<String> answers;
 
 	private int currentSentenceCounter = 0;
+	private int gameMode = 0;
+	private int correctAnswersGiven = 0;
 	private List<String> sentences;
 	private List<String> translations;
 	private List<Integer> correctAnswer;
@@ -25,7 +27,7 @@ public class QuestionDisplayer {
 
 	public void test() {
 		// Test
-		//currentSentenceCounter = 0;
+		// currentSentenceCounter = 0;
 		sentences = new ArrayList<String>();
 		sentences.add("Peter wusch die Füße seines Sohns.");
 		sentences.add("Il pleut.");
@@ -93,12 +95,28 @@ public class QuestionDisplayer {
 	}
 
 	public void setCurrentSentenceCounter(String counter) {
-		this.currentSentenceCounter=Integer.parseInt(counter);
-		System.out.println("SETCOUNTER:     " + currentSentenceCounter);
+		this.currentSentenceCounter = Integer.parseInt(counter);
+	}
+
+	public String getGameMode() {
+		return "" + (gameMode);
+	}
+
+	public void setGameMode(String counter) {
+		this.gameMode = Integer.parseInt(counter);
 	}
 	
+	public String getCorrAnswersGiven() {
+		return "" + (correctAnswersGiven);
+	}
+
+	public void setCorrAnswersGiven(String counter) {
+		this.correctAnswersGiven = Integer.parseInt(counter);
+	}
+
+
 	public String getNextCurrentSentenceCounter() {
-		return (this.currentSentenceCounter+1)+"";
+		return (this.currentSentenceCounter + 1) + "";
 	}
 
 	public Integer getCorrectAnswer() {

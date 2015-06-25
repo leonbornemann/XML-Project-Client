@@ -10,9 +10,6 @@
 <title>Language Geekinatorizer</title>
 <script type="text/javascript" src="jquery-1.11.3.js"></script>
 <script src="scripts.js" type="text/javascript"></script>
-<script language="JAVASCRIPT">
-	
-</script>
 <style>
 body {
 	overflow: auto;
@@ -28,10 +25,21 @@ body {
 	<%
 		String questionCounter = request.getParameter("m");
 		qd.setCurrentSentenceCounter(questionCounter);
+		String correctAnswersCounter = request.getParameter("n");
+		if (request.getParameter("modeButton") != null) {
+			qd.setGameMode(request.getParameter("modeButton"));
+		}
+		// add here question call
 		qd.test();
-		String questionNumbers = request.getParameter("modeButton");
+		String correctAnswer = qd.getCorrectAnswer().toString();
+		String currentSenctenceCounter = qd.getCurrentSentenceCounter();
 	%>
-
+	<script type="text/javascript">
+		correctGivenAnswers="<%=correctAnswersCounter%>";
+		correctAnswer = "<%=correctAnswer%>";
+		gameMode="<%=qd.getGameMode()%>";
+		currentSentenceCounter="<%=currentSenctenceCounter%>";
+	</script>
 	<p>
 		<img class="titleDisplay" src="img/header.gif" alt="title">
 	</p>
@@ -42,7 +50,7 @@ body {
 
 				<tr>
 					<td class="tableLeftSide firstRow"><font
-						class="headlineTextFont"><b>Sentence <%=qd.getCurrentSentenceCounter()%></b></font></td>
+						class="headlineTextFont"><b>Sentence <%=currentSenctenceCounter%></b></font></td>
 					<td width="570px" style="padding-left: 30px;"><font
 						class="textFont">The sought language is spoken in the
 							following countries:</font></td>
@@ -57,40 +65,48 @@ body {
 				</tr>
 				<tr>
 					<!-- empty -->
-					<td rowspan="5" style="padding-left: 30px;"><img
+					<td rowspan="7" style="padding-left: 30px;"><img
 						src="img/map.png" height="300px" /></td>
 				</tr>
 				<tr>
-					<td class="tableLeftSide"><form
-							action="quiz.jsp?m=<%=qd.getNextCurrentSentenceCounter()%>"
-							method="POST">
-							<button class="myButton" id="answerButton1" type="submit"
-								value='<%=qd.getAnswers().get(0)%>'><%=qd.getAnswers().get(0)%></button>
-						</form></td>
+					<td class="tableLeftSide">
+						<button class="myButton" id="answerButton1" type="submit"
+							value='<%=qd.getAnswers().get(0)%>'><%=qd.getAnswers().get(0)%></button>
+					</td>
 				</tr>
 				<tr>
 					<td class="tableLeftSide">
-						<form action="quiz.jsp?m=<%=qd.getNextCurrentSentenceCounter()%>"
-							method="POST">
-							<button class="myButton" name="answerButton2" type="submit"
-								value='<%=qd.getAnswers().get(1)%>'><%=qd.getAnswers().get(1)%></button>
-						</form>
+						<button class="myButton" id="answerButton2" type="submit"
+							value='<%=qd.getAnswers().get(1)%>'><%=qd.getAnswers().get(1)%></button>
+
+					</td>
+				</tr>
+				<tr>
+					<td class="tableLeftSide">
+						<button class="myButton" id="answerButton3" type="submit"
+							value='<%=qd.getAnswers().get(2)%>'><%=qd.getAnswers().get(2)%></button>
+					</td>
+				</tr>
+				<tr>
+					<td class="tableLeftSide">
+						<button class="myButton" id="answerButton4" type="submit"
+							value='<%=qd.getAnswers().get(3)%>'><%=qd.getAnswers().get(3)%></button>
 					</td>
 				</tr>
 				<tr>
 					<td class="tableLeftSide"><form
-							action="quiz.jsp?m=<%=qd.getNextCurrentSentenceCounter()%>"
+							action="quiz.jsp?m=<%=qd.getNextCurrentSentenceCounter()%>&n=<%=qd.getCorrAnswersGiven()%>"
 							method="POST">
-							<button class="myButton" name="answerButton3" type="submit"
-								value='<%=qd.getAnswers().get(2)%>'><%=qd.getAnswers().get(2)%></button>
+							<button class="myButtonInvisible" id="nextSentenceButton"
+								type="submit" value="Next Sentence">Next Sentence</button>
 						</form></td>
 				</tr>
 				<tr>
 					<td class="tableLeftSide"><form
-							action="quiz.jsp?m=<%=qd.getNextCurrentSentenceCounter()%>"
+							action="summary.jsp?m=<%=qd.getCorrAnswersGiven()%>"
 							method="POST">
-							<button class="myButton" name="answerButton4" type="submit"
-								value='<%=qd.getAnswers().get(3)%>'><%=qd.getAnswers().get(3)%></button>
+							<button class="myButtonInvisible" id="summaryButton"
+								type="submit" value="Summary">Summary</button>
 						</form></td>
 				</tr>
 			</table>
