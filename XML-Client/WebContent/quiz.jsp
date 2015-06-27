@@ -24,15 +24,15 @@ body {
 	<%@ page import="java.util.ArrayList"%>
 	<%
 		String questionCounter = request.getParameter("m");
-		qd.setCurrentSentenceCounter(questionCounter);
-		String correctAnswersCounter = request.getParameter("n");
-		if (request.getParameter("modeButton") != null) {
-			qd.setGameMode(request.getParameter("modeButton"));
-		}
-		// add here question call
-		qd.test();
-		String correctAnswer = qd.getCorrectAnswer().toString();
-		String currentSenctenceCounter = qd.getCurrentSentenceCounter();
+			qd.setCurrentSentenceCounter(questionCounter);
+			String correctAnswersCounter = request.getParameter("n");
+			if (request.getParameter("modeButton") != null) {
+		qd.setGameMode(request.getParameter("modeButton"));
+			}
+			// add here question call
+			qd.test();
+			String correctAnswer = qd.getCorrectAnswer().toString();
+			String currentSenctenceCounter = qd.getCurrentSentenceCounter();
 	%>
 	<script type="text/javascript">
 		correctGivenAnswers="<%=correctAnswersCounter%>";
@@ -61,18 +61,23 @@ body {
 						<p>
 							<font class="textFont">Translation: <%=qd.getTranslation()%></font></td>
 					<td height="130px">
-					<div about="http://dbpedia.org/resource/<%=qd.getCorrectAnswerString()+"_language" %>>">
-					<ul>
-					<%for (String country :  qd.getSpokenInList()){ %>
-					<li>
-						<div rel="dbp-owl:spokenIn" resource="http://dbpedia.org/resource/<%=country%>">
-							<font class="textFont"
-								style="padding-left: 30px;"><%=country %></font>
+						<div
+							about="http://dbpedia.org/resource/<%=qd.getCorrectAnswerString() + "_language"%>>">
+							<ul>
+								<%
+									for (String country : qd.getSpokenInList()) {
+								%>
+								<li>
+									<div rel="dbp-owl:spokenIn"
+										resource="http://dbpedia.org/resource/<%=country%>">
+										<font class="textFont" style="padding-left: 30px;"><%=country%></font>
+									</div>
+								</li>
+								<%
+									}
+								%>
+							</ul>
 						</div>
-					</li>
-					<%} %>
-					</ul>
-					</div>
 				</tr>
 				<tr>
 					<!-- empty -->
@@ -105,16 +110,14 @@ body {
 					</td>
 				</tr>
 				<tr>
-					<td class="tableLeftSide"><form
-							action="quiz.jsp?m=<%=qd.getNextCurrentSentenceCounter()%>&n=<%=qd.getCorrAnswersGiven()%>"
-							method="POST">
+					<td class="tableLeftSide"><form id="nextSentenceForm"
+							action="" method="POST">
 							<button class="myButtonInvisible" id="nextSentenceButton"
 								type="submit" value="Next Sentence">Next Sentence</button>
 						</form></td>
 				</tr>
 				<tr>
-					<td class="tableLeftSide"><form
-							action="summary.jsp?m=<%=qd.getCorrAnswersGiven()%>"
+					<td class="tableLeftSide"><form id="summaryForm" action=""
 							method="POST">
 							<button class="myButtonInvisible" id="summaryButton"
 								type="submit" value="Summary">Summary</button>

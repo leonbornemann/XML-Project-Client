@@ -17,12 +17,12 @@ public class QuestionDisplayer {
 	private String translation;
 	private List<String> answers;
 	
-	private String correctAnswerString;
+	String correctAnswerString;
 	
-
 	private int currentSentenceCounter = 0;
 	private int gameMode = 0;
-	private int correctAnswersGiven = 0;
+	
+	// only for testing
 	private List<String> sentences;
 	private List<String> translations;
 	private List<Integer> correctAnswer;
@@ -39,7 +39,6 @@ public class QuestionDisplayer {
 
 	public void test() {
 		// Test
-		// currentSentenceCounter = 0;
 		sentences = new ArrayList<String>();
 		sentences.add("Peter wusch die Füße seines Sohns.");
 		sentences.add("Il pleut.");
@@ -123,27 +122,8 @@ public class QuestionDisplayer {
 		this.gameMode = Integer.parseInt(counter);
 	}
 	
-	public String getCorrAnswersGiven() {
-		return "" + (correctAnswersGiven);
-	}
-
-	
-	
-	public void setCorrAnswersGiven(String counter) {
-		this.correctAnswersGiven = Integer.parseInt(counter);
-	}
-
-
-	public String getNextCurrentSentenceCounter() {
-		return (this.currentSentenceCounter + 1) + "";
-	}
-
 	public Integer getCorrectAnswer() {
 		return correctAnswer.get(currentSentenceCounter);
-	}
-
-	public void resetCurrentSentenceNumber() {
-		this.currentSentenceCounter = 0;
 	}
 
 	public String getSentence() {
@@ -171,16 +151,13 @@ public class QuestionDisplayer {
 	}
 
 	public String getCorrectAnswerString() {
-		return answersList.get(currentSentenceCounter).get(correctAnswersGiven);
+		return answersList.get(currentSentenceCounter).get(correctAnswer.get(currentSentenceCounter));
 	}
 
 	public void setCorrectAnswerString(String correctAnswerString) {
 		this.correctAnswerString = correctAnswerString;
 	}
 	
-	public void hello() {
-		System.out.println("HHHEEELLLLLOOO");
-	}
 
 	/**
 	 * Main for testing
@@ -189,10 +166,5 @@ public class QuestionDisplayer {
 	 */
 	public static void main(String[] args) {
 
-	}
-
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("AHHHHAHAHAHAHAHAHAH");
 	}
 }

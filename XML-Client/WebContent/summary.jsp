@@ -27,16 +27,18 @@ body {
 	<div class="mapDisplay">
 		<div class="containerDisplay">
 			<div class="textHeader">
-				<br> <b>Welcome to the Language Geekinatorizer!</b>
+				<br> <b>Congratulations!</b>
 			</div>
-			<p>
-				Correct answers: <b><%=correctAnswers%></b> Congratulations!
-			</p>
+			<div class="textMode">
+				<br>Correct answers: <b><%=correctAnswers%></b> <br><br>Thanks
+				for playing!
+			</div>
+			<br> <br>
 			<div class="buttonTable">
-
+				<br>
 				<form action="index.html" method="POST">
 					<button class="myButton" id="myButton" type="submit"
-						value="Welcome Page">Welcome Page</button>
+						value="Welcome Page">NEW GAME</button>
 				</form>
 
 			</div>
