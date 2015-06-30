@@ -11,7 +11,7 @@ function disableButtons(){
 }
 
 $(document).ready(function() {
-	// 
+	// button event handler
 	$(":button").click(function(event) {
 		if ($(this).prop("id") == "answerButton1") {
 			$("#nextSentenceButton").attr('class', 'myButtonNext');
@@ -42,7 +42,9 @@ $(document).ready(function() {
 			if (correctAnswer==4) correctGivenAnswers++;
 			$("#nextSentenceForm").get(0).setAttribute('action', 'quiz.jsp?m='+currentSentenceCounter+'&n='+correctGivenAnswers);
 		}
-		
+		$.get('Servlet', function(data) {
+	        alert(data);
+	    });
 		// enable summary button if it is the last sentence
 		if (gameMode==(currentSentenceCounter) & gameMode!=undefined){
 			$("#nextSentenceButton").attr('class', 'myButtonInvisible');
@@ -50,4 +52,10 @@ $(document).ready(function() {
 			$("#summaryForm").get(0).setAttribute('action', 'summary.jsp?m='+correctGivenAnswers);
 		}
 	});
+	
+	$("#svgMap").mouseenter(function(){
+		if (($(this).find("g").find("path").attr("title"))=="Germany")
+			alert("HALALALAO");
+//attr("style","fill:red");
+	})
 });

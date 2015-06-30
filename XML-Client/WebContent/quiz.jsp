@@ -29,16 +29,16 @@ body {
 			if (request.getParameter("modeButton") != null) {
 		qd.setGameMode(request.getParameter("modeButton"));
 			}
+			String currentSentenceCounter = qd.getCurrentSentenceCounter();
 			// add here question call
 			qd.test();
 			String correctAnswer = qd.getCorrectAnswer().toString();
-			String currentSenctenceCounter = qd.getCurrentSentenceCounter();
 	%>
 	<script type="text/javascript">
 		correctGivenAnswers="<%=correctAnswersCounter%>";
 		correctAnswer = "<%=correctAnswer%>";
 		gameMode="<%=qd.getGameMode()%>";
-		currentSentenceCounter="<%=currentSenctenceCounter%>";
+		currentSentenceCounter="<%=currentSentenceCounter%>";
 	</script>
 	<p>
 		<img class="titleDisplay" src="img/header.gif" alt="title">
@@ -50,7 +50,7 @@ body {
 
 				<tr>
 					<td class="tableLeftSide firstRow"><font
-						class="headlineTextFont"><b>Sentence <%=currentSenctenceCounter%></b></font></td>
+						class="headlineTextFont"><b>Sentence <%=currentSentenceCounter%></b></font></td>
 					<td width="570px" style="padding-left: 30px;"><font
 						class="textFont">The sought language is spoken in the
 							following countries:</font></td>
@@ -80,9 +80,9 @@ body {
 						</div>
 				</tr>
 				<tr>
-					<!-- empty -->
-					<td rowspan="7" style="padding-left: 30px;"><img
-						src="img/map.png" height="300px" /></td>
+					<!-- empty -->			
+					<td rowspan="7" id="svgMap" style="padding-left: 30px;"><img
+						src="img/worldHigh.svg" height="350px" width="600px"/></td>
 				</tr>
 				<tr>
 					<td class="tableLeftSide">
