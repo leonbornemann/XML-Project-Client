@@ -81,8 +81,9 @@ body {
 				</tr>
 				<tr>
 					<!-- empty -->			
-					<td rowspan="7" id="svgMap" style="padding-left: 30px;"><img
-						src="img/worldHigh.svg" height="350px" width="600px"/></td>
+					<td rowspan="7" id="svgMap" style="padding-left: 26px;">
+					<object data="img/worldHigh.svg" class="svg" height="300px" width="580px" type="image/svg+xml" id="svgObject")>
+					</object>
 				</tr>
 				<tr>
 					<td class="tableLeftSide">

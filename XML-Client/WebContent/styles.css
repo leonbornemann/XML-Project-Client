@@ -103,3 +103,18 @@ img.titleDisplay {
 	font-family: Verdana;
 	color: darkblue;
 }
+
+object {
+	background-color: white;
+}
+
+
+
+.land
+			{
+				fill: #CCC;
+				fill-opacity: 1;
+				stroke:white;
+				stroke-opacity: 1;
+				stroke-width:0.5;
+			}
