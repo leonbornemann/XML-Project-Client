@@ -35,19 +35,19 @@ public class QuestionDisplayer {
 	public void test() {
 		// Test
 		sentences = new ArrayList<String>();
-		sentences.add("Peter wusch die Füße seines Sohns.");
+		sentences.add("Tai deing o min a.");
 		sentences.add("Il pleut.");
 
 		translations = new ArrayList<String>();
-		translations.add("Peter washed his son's feet.");
+		translations.add("We are all here.");
 		translations.add("It is raining.");
 
 		answersList = new ArrayList<List<String>>();
 		answers = new ArrayList<String>();
-		answers.add("German");
-		answers.add("English");
-		answers.add("Finnish");
-		answers.add("Polish");
+		answers.add("Wersing");
+		answers.add("Teiwa");
+		answers.add("Abui");
+		answers.add("Kamang");
 		answersList.add(answers);
 		
 		answers = new ArrayList<String>();
@@ -62,8 +62,8 @@ public class QuestionDisplayer {
 		correctAnswer.add(3);
 		
 		spokenInList = new ArrayList<String>();
-		spokenInList.add("Germany");
-		spokenInList.add("Poland");
+		spokenInList.add("Indonesia");
+		spokenInList.add("Malaysia");
 
 		// Test Ende
 	}
