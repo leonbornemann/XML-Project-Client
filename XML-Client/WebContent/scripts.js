@@ -74,7 +74,7 @@ $(document).ready(function() {
 			if (correctAnswer==4) correctGivenAnswers++;
 			$("#nextSentenceForm").get(0).setAttribute('action', 'quiz.jsp?m='+currentSentenceCounter+'&n='+correctGivenAnswers);
 		}
-	    });
+		
 		// enable summary button if it is the last sentence
 		if (gameMode==(currentSentenceCounter) & gameMode!=undefined){
 			$("#nextSentenceButton").attr('class', 'myButtonInvisible');
