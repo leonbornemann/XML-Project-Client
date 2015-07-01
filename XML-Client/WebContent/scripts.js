@@ -43,7 +43,7 @@ $(document).ready(function() {
     });
 	
 		
-	// button event handler
+	// button click event handler
 	$(":button").click(function(event) {
 		if ($(this).prop("id") == "answerButton1") {
 			$("#nextSentenceButton").attr('class', 'myButtonNext');
@@ -74,8 +74,6 @@ $(document).ready(function() {
 			if (correctAnswer==4) correctGivenAnswers++;
 			$("#nextSentenceForm").get(0).setAttribute('action', 'quiz.jsp?m='+currentSentenceCounter+'&n='+correctGivenAnswers);
 		}
-		$.get('Servlet', function(data) {
-	        alert(data);
 	    });
 		// enable summary button if it is the last sentence
 		if (gameMode==(currentSentenceCounter) & gameMode!=undefined){
