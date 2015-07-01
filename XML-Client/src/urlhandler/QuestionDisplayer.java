@@ -35,9 +35,9 @@ public class QuestionDisplayer {
 	public void test() {
 		// Test
 		sentences = new ArrayList<String>();
-		sentences.add("Tai deing o min a.");
+		sentences.add("Tai ’ deing o min a.");
 		sentences.add("Il pleut.");
-
+		
 		translations = new ArrayList<String>();
 		translations.add("We are all here.");
 		translations.add("It is raining.");

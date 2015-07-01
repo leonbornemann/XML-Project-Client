@@ -88,10 +88,10 @@ $(document).ready(function() {
 		// get the object and withing the svg search for DE
 	    	var a = document.getElementById("svgObject");
 	    	var svgDoc = a.contentDocument;
-	    	var path = svgDoc.getElementById("ID");
+	    	var path = svgDoc.getElementById("Indonesia");
 	    	path.setAttribute("style","fill:red");
 	    	
-	    	path = svgDoc.getElementById("MY");
+	    	path = svgDoc.getElementById("Malaysia");
 	    	path.setAttribute("style","fill:red");
 	    
 	});
