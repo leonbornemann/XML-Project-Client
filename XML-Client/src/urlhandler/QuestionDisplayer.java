@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -60,14 +62,18 @@ public class QuestionDisplayer extends HttpServlet {
 
 			numQuestions = Integer.parseInt(request.getParameter("numberOfQuestions"));
 			try {
+				XMLQuestion questions=getQuestion();
 				String showQuestion = showQuestion(numQuestions);
 				this.questionList = XMLUtilities.convertFromXML(showQuestion);
 				this.questionCounter = 0;
 				this.correctAnswerCounter = 0;
 				setQuestion(questionList.getQuestion(questionCounter));
-				request.setAttribute("question", getQuestion());
+				request.setAttribute("question", questions);
 				request.setAttribute("questionCounter", questionCounter+1);
 				request.setAttribute("numQuestion", numQuestions);
+				//create a randomized list of answers
+				ArrayList<String> answerList = createRandomAnswerList(questions);
+				request.setAttribute("answerList", answerList);
 			} catch (NumberFormatException e) {
 				e.printStackTrace();
 			} catch (Exception e) {
@@ -85,15 +91,22 @@ public class QuestionDisplayer extends HttpServlet {
 			}
 			this.questionCounter++;
 			setQuestion(questionList.getQuestion(questionCounter));
-			request.setAttribute("question", getQuestion());
+			
+			XMLQuestion questions=getQuestion();
+			request.setAttribute("question", questions);
 			request.setAttribute("questionCounter", questionCounter+1);
 			request.setAttribute("numQuestion", numQuestions);
-			
-			
+			//create a randomized list of answers
+			ArrayList<String> answerList = createRandomAnswerList(questions);
+			request.setAttribute("answerList", answerList);
 			RequestDispatcher view = request.getRequestDispatcher("/quiz.jsp");
 			view.forward(request, response);
 		}
 		else if ("summary".equals(status)){
+			String givenAnswer = request.getParameter("summary");
+			if ("1".equals(givenAnswer)){
+				this.correctAnswerCounter++;
+			}
 			request.setAttribute("correctAnswerCounter", correctAnswerCounter);
 			request.setAttribute("questionCounter", questionCounter+1);
 			request.setAttribute("numQuestion", numQuestions);
@@ -102,6 +115,16 @@ public class QuestionDisplayer extends HttpServlet {
 		}
 	}
 	
+	
+	private ArrayList<String> createRandomAnswerList(XMLQuestion question){
+		ArrayList<String> answerList = new ArrayList<String>();
+		answerList.add(question.getQuestionAnswers().getRight());
+		answerList.add(question.getQuestionAnswers().getWrong1());
+		answerList.add(question.getQuestionAnswers().getWrong2());
+		answerList.add(question.getQuestionAnswers().getWrong3());
+		Collections.shuffle(answerList);
+		return answerList;
+	}
 
 	/**
 	 * Queries the server (through a URL) for a question and displays it on the
@@ -224,52 +247,4 @@ public class QuestionDisplayer extends HttpServlet {
 		this.questionList = questionList;
 	}
 
-	/******************
-	 * TEST
-	 * 
-	 * @throws Exception
-	 ******************/
-	public static void main(String[] args) throws Exception {
-		// QuestionDisplayer q = new QuestionDisplayer();
-		// ArrayList<String> obj = q.showQuestion(2);
-		// for (String string : obj) {
-		// System.out.println(string);
-		// }
-	}
-
-	public void test() {
-		// Test
-		sentences = new ArrayList<String>();
-		sentences.add("Tai ’ deing o min a.");
-		sentences.add("Il pleut.");
-
-		translations = new ArrayList<String>();
-		translations.add("We are all here.");
-		translations.add("It is raining.");
-
-		answersList = new ArrayList<List<String>>();
-		answers = new ArrayList<String>();
-		answers.add("Wersing");
-		answers.add("Teiwa");
-		answers.add("Abui");
-		answers.add("Kamang");
-		answersList.add(answers);
-
-		answers = new ArrayList<String>();
-		answers.add("English");
-		answers.add("Czech");
-		answers.add("French");
-		answers.add("Swedish");
-		answersList.add(answers);
-
-		correctAnswer = new ArrayList<Integer>();
-		correctAnswer.add(1);
-		correctAnswer.add(3);
-
-		spokenInList = new ArrayList<String>();
-		spokenInList.add("Indonesia");
-		spokenInList.add("Malaysia");
-
-		// Test Ende
-	}
 }

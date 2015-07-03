@@ -2,6 +2,7 @@ var countries;
 var correctAnswer;
 var questionCounter;
 var numQuestion;
+var answerList;
 
 
 // disable all answer buttons
@@ -13,7 +14,15 @@ function disableButtons(){
 
 $(document).ready(function() {
 	
-	//this piece of codes convers object to svg such that we can apply CSS to it.
+	// fill answer buttons randomized
+	for (var i=1;i<=4;i++){
+	    		$("#answerButton"+i).attr('value', answerList[i-1]);
+	    		$("#answerButton"+i).html(answerList[i-1]);
+	    	
+	}
+	
+	// this piece of codes convers object to svg such that we can apply CSS to
+	// it.
 	// without this nothing is applied!
 	jQuery('object.svg').each(function(){
         var $img = jQuery(this);
@@ -58,7 +67,10 @@ $(document).ready(function() {
 		}
 		
 		if (numQuestion == questionCounter){
-			$('#summaryButton').attr('class', 'myButtonNext').attr('value', '0');
+			if (answer == correctAnswer)
+				$('#summaryButton').attr('class', 'myButtonNext').attr('value', '1');
+			else 
+				$('#summaryButton').attr('class', 'myButtonNext').attr('value', '0');
 			$('#nextSentenceButton').attr('class', 'myButtonInvisible');
 		}
 		disableButtons();
@@ -69,13 +81,13 @@ $(document).ready(function() {
 	$(window).load(function(){
 		// get the object and withing the svg search for DE
 	    	var a = document.getElementById("svgObject");
-//	    	var svgDoc = a.contentDocument;
+// var svgDoc = a.contentDocument;
 	    	
 	    	for (var i=0; i<countries.length; i++){
 	    		var path = a.getElementById(countries[i]);
 	    		path.setAttribute("style","fill:red");
 	    	}
-	    
+	    	
 	});
 
 });

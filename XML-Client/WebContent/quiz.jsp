@@ -44,7 +44,16 @@ body {
 	
 	String correctAnswer = question.getQuestionAnswers().getRight();
 	int numQuestion = ((Integer)request.getAttribute("numQuestion")).intValue();
-	
+	ArrayList<String> answerList=(ArrayList<String>)request.getAttribute("answerList");
+	StringBuilder sb2 = new StringBuilder();
+	sb2.append("[");
+	for (int i=0; i<answerList.size(); i++){
+		sb2.append("\"").append(answerList.get(i)).append("\"");
+		if (i+1 <  answerList.size()){
+			sb2.append(",");
+		}
+	}
+	sb2.append("]");
 	%>
 	
 	<script type="text/javascript">
@@ -52,6 +61,7 @@ body {
 	correctAnswer = "<%=correctAnswer%>";
 	numQuestion = "<%=numQuestion%>";
 	questionCounter = "<%=questionCounter%>";
+	answerList = <%=sb2.toString()%>;
 	</script>		
 
 
@@ -102,42 +112,35 @@ body {
 				</tr>
 				<tr>
 					<td class="tableLeftSide">
-						<button class="myButton" id="answerButton1" type="submit"
-							value='<%=question.getQuestionAnswers().getRight()%>'><%=question.getQuestionAnswers().getRight()%></button>
+						<button class="myButton" id="answerButton1" type="submit"></button>
 					</td>
 				</tr>
 				<tr>
 					<td class="tableLeftSide">
-						<button class="myButton" id="answerButton2" type="submit"
-							value='<%=question.getQuestionAnswers().getWrong1()%>'><%=question.getQuestionAnswers().getWrong1()%></button>
+						<button class="myButton" id="answerButton2" type="submit"></button>
 
 					</td>
 				</tr>
 				<tr>
 					<td class="tableLeftSide">
-						<button class="myButton" id="answerButton3" type="submit"
-							value='<%=question.getQuestionAnswers().getWrong2()%>'><%=question.getQuestionAnswers().getWrong2()%></button>
+						<button class="myButton" id="answerButton3" type="submit"></button>
 					</td>
 				</tr>
 				<tr>
 					<td class="tableLeftSide">
-						<button class="myButton" id="answerButton4" type="submit"
-							value='<%=question.getQuestionAnswers().getWrong3()%>'><%=question.getQuestionAnswers().getWrong3()%></button>
+						<button class="myButton" id="answerButton4" type="submit"></button>
 					</td>
 				</tr>
 				<tr>
 					<td class="tableLeftSide">
-						<form id="sunnaryForm"
-							action="questionDisplayer" method="POST">
+						<form id="sunnaryForm" action="questionDisplayer" method="POST">
 							<input type="hidden" name="status" value="summary">
-							
 								<button class="myButtonInvisible" id="summaryButton" name="summary"
 								type="submit" value="Summary">Summary</button></form>
-							<form id="nextSentenceForm"
-							action="questionDisplayer" method="POST">
+						
+						<form id="nextSentenceForm" action="questionDisplayer" method="POST">
 							<input type="hidden" name="status" value="quiz">
-
-								<button class="myButtonInvisible" id="nextSentenceButton" name="givenAnswer"
+							<button class="myButtonInvisible" id="nextSentenceButton" name="givenAnswer"
 								type="submit" value="Next Sentence">Next Sentence</button>
 						</form>
 					</td>
