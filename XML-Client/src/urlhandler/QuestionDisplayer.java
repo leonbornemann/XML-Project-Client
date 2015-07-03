@@ -9,7 +9,6 @@ import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,17 +17,15 @@ import xmlquestion.XMLQuestion;
 import xmlquestion.XMLQuestionList;
 import xmlquestion.XMLUtilities;
 
-
 public class QuestionDisplayer extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
+	
+	private int numQuestions;
 	private XMLQuestion question;
 	private XMLQuestionList questionList;
 	private int questionCounter;
-	
-	
-	
 
 	private String sentence;
 	private String translation;
@@ -43,39 +40,68 @@ public class QuestionDisplayer extends HttpServlet {
 	private List<Integer> correctAnswer;
 	private List<List<String>> answersList;
 	private List<String> spokenInList;
+	
+	private int correctAnswerCounter;
 
-	
 	@Override
-	protected void doGet (HttpServletRequest request,
+	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-	
-	}	
+
+	}
+
 	/**
 	 * Aufruf von index.html: hole Fragen und lade die erste in die Seite.
 	 */
 	@Override
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		String numQuestions = request.getParameter("numberOfQuestions");
-		try {
-			String showQuestion = showQuestion(Integer.parseInt(numQuestions));
-			this.questionList = XMLUtilities.convertFromXML(showQuestion);
-			this.questionCounter = 0;
-			setQuestion(questionList.getQuestion(questionCounter));
-			request.setAttribute("question", getQuestion());
-			request.setAttribute("questionCounter", questionCounter);
-			
-			
-		} catch (NumberFormatException e) {
-			e.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
+		String status = request.getParameter("status");
+		if ("index".equals(status)) {
+
+			numQuestions = Integer.parseInt(request.getParameter("numberOfQuestions"));
+			try {
+				String showQuestion = showQuestion(numQuestions);
+				this.questionList = XMLUtilities.convertFromXML(showQuestion);
+				this.questionCounter = 0;
+				this.correctAnswerCounter = 0;
+				setQuestion(questionList.getQuestion(questionCounter));
+				request.setAttribute("question", getQuestion());
+				request.setAttribute("questionCounter", questionCounter+1);
+				request.setAttribute("numQuestion", numQuestions);
+			} catch (NumberFormatException e) {
+				e.printStackTrace();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			RequestDispatcher view = request.getRequestDispatcher("/quiz.jsp");
+			view.forward(request, response);
 		}
 		
-		RequestDispatcher view = request.getRequestDispatcher("/quiz.jsp");
-		view.forward(request, response);
-		
+		else if ("quiz".equals(status)){
+			String givenAnswer = request.getParameter("givenAnswer");
+			if ("1".equals(givenAnswer)){
+				this.correctAnswerCounter++;
+			}
+			this.questionCounter++;
+			setQuestion(questionList.getQuestion(questionCounter));
+			request.setAttribute("question", getQuestion());
+			request.setAttribute("questionCounter", questionCounter+1);
+			request.setAttribute("numQuestion", numQuestions);
+			
+			
+			RequestDispatcher view = request.getRequestDispatcher("/quiz.jsp");
+			view.forward(request, response);
+		}
+		else if ("summary".equals(status)){
+			request.setAttribute("correctAnswerCounter", correctAnswerCounter);
+			request.setAttribute("questionCounter", questionCounter+1);
+			request.setAttribute("numQuestion", numQuestions);
+			RequestDispatcher view = request.getRequestDispatcher("/summary.jsp");
+			view.forward(request, response);
+		}
 	}
+	
 
 	/**
 	 * Queries the server (through a URL) for a question and displays it on the
@@ -83,19 +109,17 @@ public class QuestionDisplayer extends HttpServlet {
 	 * 
 	 * @throws Exception
 	 */
-	public String showQuestion(int numberOfQuestions)
-			throws Exception {
+	public String showQuestion(int numberOfQuestions) throws Exception {
 
 		StringBuilder sb = new StringBuilder();
 		// URL questionURL = new
 		// URL("http://localhost:8080/XML-Project/quiz/hello/welcome");
 		URL welcomeURL = new URL(
-				"http://localhost:8080/XML-Project/quiz/hello/question");
+				"http://localhost:8080/XML-Project/quiz/hello/question"+numberOfQuestions);
 
 		BufferedReader br = new BufferedReader(new InputStreamReader(
 				welcomeURL.openStream(), "UTF-8"));
 
-		ArrayList<String> lines = new ArrayList<String>();
 		String inputLine;
 
 		while ((inputLine = br.readLine()) != null)
@@ -123,13 +147,13 @@ public class QuestionDisplayer extends HttpServlet {
 		this.spokenInList = spokenInList;
 	}
 
-//	public String getCurrentSentenceCounter() {
-//		return "" + (currentSentenceCounter + 1);
-//	}
-//
-//	public void setCurrentSentenceCounter(String counter) {
-//		this.currentSentenceCounter = Integer.parseInt(counter);
-//	}
+	// public String getCurrentSentenceCounter() {
+	// return "" + (currentSentenceCounter + 1);
+	// }
+	//
+	// public void setCurrentSentenceCounter(String counter) {
+	// this.currentSentenceCounter = Integer.parseInt(counter);
+	// }
 
 	public String getGameMode() {
 		return "" + (gameMode);
@@ -183,11 +207,11 @@ public class QuestionDisplayer extends HttpServlet {
 	public int getQuestionCounter() {
 		return questionCounter;
 	}
-	
+
 	public void setQuestionCounter(int questionCounter) {
 		this.questionCounter = questionCounter;
 	}
-	
+
 	public void setQuestion(XMLQuestion question) {
 		this.question = question;
 	}
@@ -199,17 +223,18 @@ public class QuestionDisplayer extends HttpServlet {
 	public void setQuestionList(XMLQuestionList questionList) {
 		this.questionList = questionList;
 	}
-	
+
 	/******************
 	 * TEST
-	 * @throws Exception 
+	 * 
+	 * @throws Exception
 	 ******************/
 	public static void main(String[] args) throws Exception {
-//		QuestionDisplayer q = new QuestionDisplayer();
-//		ArrayList<String> obj = q.showQuestion(2);
-//		for (String string : obj) {
-//			System.out.println(string);
-//		}
+		// QuestionDisplayer q = new QuestionDisplayer();
+		// ArrayList<String> obj = q.showQuestion(2);
+		// for (String string : obj) {
+		// System.out.println(string);
+		// }
 	}
 
 	public void test() {

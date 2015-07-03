@@ -7,7 +7,6 @@
 <title>Language Geekinatorizer</title>
 <meta property="dc:creator" content="Alex, Jan, Javier, Leon, Markus" />
 <script type="text/javascript" src="jquery-1.11.3.js"></script>
-<script src="scripts.js" type="text/javascript"></script>
 <style>
 body {
 	overflow: auto;
@@ -34,15 +33,11 @@ body {
 					<tr>
 						<td><br><br><br>
 							<form action="questionDisplayer" method="POST">
+								<input type="hidden" value="index" name="status">
+								<button class="myButton" name="numberOfQuestions" type="submit" value="5">5 sentences</button>
+								<br>
 								<button class="myButton" name="numberOfQuestions" type="submit"
-									value="2">2 sentences</button>
-							</form></td>
-					</tr>
-					<tr>
-						<td><br><br>
-							<form action="quiz.jsp?m=0&n=0" method="POST">
-								<button class="myButton" name="numberOfQuestions" type="submit"
-									value="5">10 sentences</button>
+									value="10">10 sentences</button>
 							</form>
 						</td>
 					</tr>

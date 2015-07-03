@@ -18,7 +18,8 @@ body {
 </head>
 <body bgcolor="#3981D9">
 	<%
-		String correctAnswers = request.getParameter("m");
+		int correctAnswers = ((Integer)request.getAttribute("correctAnswerCounter")).intValue();
+		int questionCounter = ((Integer)request.getAttribute("questionCounter")).intValue();
 	%>
 	<p>
 		<img class="titleDisplay" src="img/header.gif" alt="title">
@@ -30,15 +31,14 @@ body {
 				<br> <b>Congratulations!</b>
 			</div>
 			<div class="textMode">
-				<br>Correct answers: <b><%=correctAnswers%></b> <br><br>Thanks
+				<br>Correct answers: <b><%=correctAnswers%> of <%=questionCounter %></b> <br><br>Thanks
 				for playing!
 			</div>
 			<br> <br>
 			<div class="buttonTable">
 				<br>
 				<form action="index.html" method="POST">
-					<button class="myButton" id="myButton" type="submit"
-						value="Welcome Page">NEW GAME</button>
+					<button class="myButton" id="myButton" type="submit">NEW GAME</button>
 				</form>
 
 			</div>

@@ -29,6 +29,7 @@ body {
 	<% 
 	XMLQuestion question = (XMLQuestion)request.getAttribute("question");
 	int questionCounter = ((Integer)request.getAttribute("questionCounter")).intValue();
+	
 	ArrayList<XMLCountry> countries = question.getCountryList();
 	ArrayList<String> countryNames = new ArrayList<String>();
 	StringBuilder sb = new StringBuilder();
@@ -41,11 +42,16 @@ body {
 	}
 	sb.append("]");
 	
+	String correctAnswer = question.getQuestionAnswers().getRight();
+	int numQuestion = ((Integer)request.getAttribute("numQuestion")).intValue();
 	
 	%>
 	
 	<script type="text/javascript">
 	countries = <%=sb.toString()%>;
+	correctAnswer = "<%=correctAnswer%>";
+	numQuestion = "<%=numQuestion%>";
+	questionCounter = "<%=questionCounter%>";
 	</script>		
 
 
@@ -90,7 +96,7 @@ body {
 				</tr>
 				<tr>
 					<!-- empty -->			
-					<td rowspan="7" id="svgMap" style="padding-left: 26px;">
+					<td rowspan="6" id="svgMap" style="padding-left: 26px;">
 					<object data="img/worldHigh.svg" class="svg" height="300px" width="580px" type="image/svg+xml" id="svgObject">
 					</object>
 				</tr>
@@ -120,18 +126,21 @@ body {
 					</td>
 				</tr>
 				<tr>
-					<td class="tableLeftSide"><form id="nextSentenceForm"
-							action="" method="POST">
-							<button class="myButtonInvisible" id="nextSentenceButton"
+					<td class="tableLeftSide">
+						<form id="sunnaryForm"
+							action="questionDisplayer" method="POST">
+							<input type="hidden" name="status" value="summary">
+							
+								<button class="myButtonInvisible" id="summaryButton" name="summary"
+								type="submit" value="Summary">Summary</button></form>
+							<form id="nextSentenceForm"
+							action="questionDisplayer" method="POST">
+							<input type="hidden" name="status" value="quiz">
+
+								<button class="myButtonInvisible" id="nextSentenceButton" name="givenAnswer"
 								type="submit" value="Next Sentence">Next Sentence</button>
-						</form></td>
-				</tr>
-				<tr>
-					<td class="tableLeftSide"><form id="summaryForm" action=""
-							method="POST">
-							<button class="myButtonInvisible" id="summaryButton"
-								type="submit" value="Summary">Summary</button>
-						</form></td>
+						</form>
+					</td>
 				</tr>
 			</table>
 		</div>
