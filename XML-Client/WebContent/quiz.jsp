@@ -82,7 +82,7 @@ body {
 				</tr>
 				<tr>
 					<td class="tableLeftSide secondRow" rowspan="2"><font
-						class="textFont textFontSentence"><b><%=question.getQuestionSentence().getOriginal()%></b></font>
+						class="textFont textFontSentence"><b>Which language is it?<br><br><%=question.getQuestionSentence().getOriginal()%></b></font>
 						<p>
 							<font class="textFont">Translation: <%=question.getQuestionSentence().getTranslation()%></font></td>
 					<td height="130px">
