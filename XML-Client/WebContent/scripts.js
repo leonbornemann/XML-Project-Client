@@ -1,7 +1,4 @@
-var correctAnswer;
-var correctGivenAnswers;
-var gameMode;
-var currentSentenceCounter;
+var countries;
 
 // disable all answer buttons
 function disableButtons(){
@@ -18,7 +15,7 @@ $(document).ready(function() {
         var $img = jQuery(this);
         var imgID = $img.attr('id');
         var imgClass = $img.attr('class');
-        var imgURL = $img.attr('src');
+        var imgURL = $img.attr('data');
 
         jQuery.get(imgURL, function(data) {
             // Get the SVG tag, ignore the rest
@@ -44,55 +41,55 @@ $(document).ready(function() {
 	
 		
 	// button click event handler
-	$(":button").click(function(event) {
-		if ($(this).prop("id") == "answerButton1") {
-			$("#nextSentenceButton").attr('class', 'myButtonNext');
-			$("#answerButton1").attr('class', 'myButtonWrong');
-			$("#answerButton"+correctAnswer).attr('class', 'myButtonRight');
-			disableButtons();
-			if (correctAnswer==1) correctGivenAnswers++;
-			$("#nextSentenceForm").get(0).setAttribute('action', 'quiz.jsp?m='+currentSentenceCounter+'&n='+correctGivenAnswers);
-		} else if ($(this).prop("id") == "answerButton2") {
-			$("#nextSentenceButton").attr('class', 'myButtonNext');
-			$("#answerButton2").attr('class', 'myButtonWrong');
-			$("#answerButton"+correctAnswer).attr('class', 'myButtonRight');
-			disableButtons();
-			if (correctAnswer==2) correctGivenAnswers++;
-			$("#nextSentenceForm").get(0).setAttribute('action', 'quiz.jsp?m='+currentSentenceCounter+'&n='+correctGivenAnswers);
-		} else if ($(this).prop("id") == "answerButton3") {
-			$("#nextSentenceButton").attr('class', 'myButtonNext');
-			$("#answerButton3").attr('class', 'myButtonWrong');
-			$("#answerButton"+correctAnswer).attr('class', 'myButtonRight');
-			disableButtons();
-			if (correctAnswer==3) correctGivenAnswers++;
-			$("#nextSentenceForm").get(0).setAttribute('action', 'quiz.jsp?m='+currentSentenceCounter+'&n='+correctGivenAnswers);
-		} else if ($(this).prop("id") == "answerButton4") {
-			$("#nextSentenceButton").attr('class', 'myButtonNext');
-			$("#answerButton4").attr('class', 'myButtonWrong');
-			$("#answerButton"+correctAnswer).attr('class', 'myButtonRight');
-			disableButtons();
-			if (correctAnswer==4) correctGivenAnswers++;
-			$("#nextSentenceForm").get(0).setAttribute('action', 'quiz.jsp?m='+currentSentenceCounter+'&n='+correctGivenAnswers);
-		}
-		
-		// enable summary button if it is the last sentence
-		if (gameMode==(currentSentenceCounter) & gameMode!=undefined){
-			$("#nextSentenceButton").attr('class', 'myButtonInvisible');
-			$("#summaryButton").attr('class', 'myButtonNext');
-			$("#summaryForm").get(0).setAttribute('action', 'summary.jsp?m='+correctGivenAnswers);
-		}
-	});
+//	$(":button").click(function(event) {
+//		if ($(this).prop("id") == "answerButton1") {
+//			$("#nextSentenceButton").attr('class', 'myButtonNext');
+//			$("#answerButton1").attr('class', 'myButtonWrong');
+//			$("#answerButton"+correctAnswer).attr('class', 'myButtonRight');
+//			disableButtons();
+//			if (correctAnswer==1) correctGivenAnswers++;
+//			$("#nextSentenceForm").get(0).setAttribute('action', 'quiz.jsp?m='+currentSentenceCounter+'&n='+correctGivenAnswers);
+//		} else if ($(this).prop("id") == "answerButton2") {
+//			$("#nextSentenceButton").attr('class', 'myButtonNext');
+//			$("#answerButton2").attr('class', 'myButtonWrong');
+//			$("#answerButton"+correctAnswer).attr('class', 'myButtonRight');
+//			disableButtons();
+//			if (correctAnswer==2) correctGivenAnswers++;
+//			$("#nextSentenceForm").get(0).setAttribute('action', 'quiz.jsp?m='+currentSentenceCounter+'&n='+correctGivenAnswers);
+//		} else if ($(this).prop("id") == "answerButton3") {
+//			$("#nextSentenceButton").attr('class', 'myButtonNext');
+//			$("#answerButton3").attr('class', 'myButtonWrong');
+//			$("#answerButton"+correctAnswer).attr('class', 'myButtonRight');
+//			disableButtons();
+//			if (correctAnswer==3) correctGivenAnswers++;
+//			$("#nextSentenceForm").get(0).setAttribute('action', 'quiz.jsp?m='+currentSentenceCounter+'&n='+correctGivenAnswers);
+//		} else if ($(this).prop("id") == "answerButton4") {
+//			$("#nextSentenceButton").attr('class', 'myButtonNext');
+//			$("#answerButton4").attr('class', 'myButtonWrong');
+//			$("#answerButton"+correctAnswer).attr('class', 'myButtonRight');
+//			disableButtons();
+//			if (correctAnswer==4) correctGivenAnswers++;
+//			$("#nextSentenceForm").get(0).setAttribute('action', 'quiz.jsp?m='+currentSentenceCounter+'&n='+correctGivenAnswers);
+//		}
+//		
+//		// enable summary button if it is the last sentence
+//		if (gameMode==(currentSentenceCounter) & gameMode!=undefined){
+//			$("#nextSentenceButton").attr('class', 'myButtonInvisible');
+//			$("#summaryButton").attr('class', 'myButtonNext');
+//			$("#summaryForm").get(0).setAttribute('action', 'summary.jsp?m='+correctGivenAnswers);
+//		}
+//	});
 	
 	// when the svg DOM is loaded, we can change colors
 	$(window).load(function(){
 		// get the object and withing the svg search for DE
 	    	var a = document.getElementById("svgObject");
-	    	var svgDoc = a.contentDocument;
-	    	var path = svgDoc.getElementById("Indonesia");
-	    	path.setAttribute("style","fill:red");
+//	    	var svgDoc = a.contentDocument;
 	    	
-	    	path = svgDoc.getElementById("Malaysia");
-	    	path.setAttribute("style","fill:red");
+	    	for (var i=0; i<countries.length; i++){
+	    		var path = a.getElementById(countries[i]);
+	    		path.setAttribute("style","fill:red");
+	    	}
 	    
 	});
 

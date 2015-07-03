@@ -1,6 +1,7 @@
-<%!QuestionDisplayer qd = new QuestionDisplayer();%>
+<%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="ISO-8859-1"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html prefix="dbp-owl: http://dbpedia.org/ontology/">
 <head>
@@ -22,24 +23,32 @@ body {
 	<!-- Imports -->
 	<%@ page import="urlhandler.QuestionDisplayer"%>
 	<%@ page import="java.util.ArrayList"%>
-	<%
-		String questionCounter = request.getParameter("m");
-			qd.setCurrentSentenceCounter(questionCounter);
-			String correctAnswersCounter = request.getParameter("n");
-			if (request.getParameter("modeButton") != null) {
-		qd.setGameMode(request.getParameter("modeButton"));
-			}
-			String currentSentenceCounter = qd.getCurrentSentenceCounter();
-			// add here question call
-			qd.test();
-			String correctAnswer = qd.getCorrectAnswer().toString();
+	<%@ page import="xmlquestion.XMLCountry" %>
+	<%@ page import="xmlquestion.XMLQuestion" %>
+	
+	<% 
+	XMLQuestion question = (XMLQuestion)request.getAttribute("question");
+	int questionCounter = ((Integer)request.getAttribute("questionCounter")).intValue();
+	ArrayList<XMLCountry> countries = question.getCountryList();
+	ArrayList<String> countryNames = new ArrayList<String>();
+	StringBuilder sb = new StringBuilder();
+	sb.append("[");
+	for (int i=0; i<countries.size(); i++){
+		sb.append("\"").append(countries.get(i).getName()).append("\"");
+		if (i+1 <  countries.size()){
+			sb.append(",");
+		}
+	}
+	sb.append("]");
+	
+	
 	%>
+	
 	<script type="text/javascript">
-		correctGivenAnswers="<%=correctAnswersCounter%>";
-		correctAnswer = "<%=correctAnswer%>";
-		gameMode="<%=qd.getGameMode()%>";
-		currentSentenceCounter="<%=currentSentenceCounter%>";
-	</script>
+	countries = <%=sb.toString()%>;
+	</script>		
+
+
 	<p>
 		<img class="titleDisplay" src="img/header.gif" alt="title">
 	</p>
@@ -50,27 +59,27 @@ body {
 
 				<tr>
 					<td class="tableLeftSide firstRow"><font
-						class="headlineTextFont"><b>Sentence <%=currentSentenceCounter%></b></font></td>
+						class="headlineTextFont"><b>Sentence <%=questionCounter%></b></font></td>
 					<td width="570px" style="padding-left: 30px;"><font
 						class="textFont">The sought language is spoken in the
 							following countries:</font></td>
 				</tr>
 				<tr>
 					<td class="tableLeftSide secondRow" rowspan="2"><font
-						class="textFont textFontSentence"><b><%=qd.getSentence()%></b></font>
+						class="textFont textFontSentence"><b><%=question.getQuestionSentence().getOriginal()%></b></font>
 						<p>
-							<font class="textFont">Translation: <%=qd.getTranslation()%></font></td>
+							<font class="textFont">Translation: <%=question.getQuestionSentence().getTranslation()%></font></td>
 					<td height="130px">
 						<div
-							about="http://dbpedia.org/resource/<%=qd.getCorrectAnswerString() + "_language"%>>">
+							about="http://dbpedia.org/resource/<%=question.getQuestionAnswers().getRight() + "_language"%>>">
 							<ul>
 								<%
-									for (String country : qd.getSpokenInList()) {
+									for (XMLCountry country : question.getCountryList()) {
 								%>
 								<li>
 									<div rel="dbp-owl:spokenIn"
-										resource="http://dbpedia.org/resource/<%=country%>">
-										<font class="textFont" style="padding-left: 30px;"><%=country%></font>
+										resource="http://dbpedia.org/resource/<%=country.getName()%>">
+										<font class="textFont" style="padding-left: 30px;"><%=country.getName()%></font>
 									</div>
 								</li>
 								<%
@@ -82,32 +91,32 @@ body {
 				<tr>
 					<!-- empty -->			
 					<td rowspan="7" id="svgMap" style="padding-left: 26px;">
-					<object data="img/worldHigh.svg" class="svg" height="300px" width="580px" type="image/svg+xml" id="svgObject")>
+					<object data="img/worldHigh.svg" class="svg" height="300px" width="580px" type="image/svg+xml" id="svgObject">
 					</object>
 				</tr>
 				<tr>
 					<td class="tableLeftSide">
 						<button class="myButton" id="answerButton1" type="submit"
-							value='<%=qd.getAnswers().get(0)%>'><%=qd.getAnswers().get(0)%></button>
+							value='<%=question.getQuestionAnswers().getRight()%>'><%=question.getQuestionAnswers().getRight()%></button>
 					</td>
 				</tr>
 				<tr>
 					<td class="tableLeftSide">
 						<button class="myButton" id="answerButton2" type="submit"
-							value='<%=qd.getAnswers().get(1)%>'><%=qd.getAnswers().get(1)%></button>
+							value='<%=question.getQuestionAnswers().getWrong1()%>'><%=question.getQuestionAnswers().getWrong1()%></button>
 
 					</td>
 				</tr>
 				<tr>
 					<td class="tableLeftSide">
 						<button class="myButton" id="answerButton3" type="submit"
-							value='<%=qd.getAnswers().get(2)%>'><%=qd.getAnswers().get(2)%></button>
+							value='<%=question.getQuestionAnswers().getWrong2()%>'><%=question.getQuestionAnswers().getWrong2()%></button>
 					</td>
 				</tr>
 				<tr>
 					<td class="tableLeftSide">
 						<button class="myButton" id="answerButton4" type="submit"
-							value='<%=qd.getAnswers().get(3)%>'><%=qd.getAnswers().get(3)%></button>
+							value='<%=question.getQuestionAnswers().getWrong3()%>'><%=question.getQuestionAnswers().getWrong3()%></button>
 					</td>
 				</tr>
 				<tr>

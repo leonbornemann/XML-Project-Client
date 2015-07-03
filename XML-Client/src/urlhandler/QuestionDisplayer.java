@@ -1,28 +1,119 @@
 package urlhandler;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class QuestionDisplayer {
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import xmlquestion.XMLQuestion;
+import xmlquestion.XMLQuestionList;
+import xmlquestion.XMLUtilities;
+
+
+public class QuestionDisplayer extends HttpServlet {
+
+	private static final long serialVersionUID = 1L;
+
+	private XMLQuestion question;
+	private XMLQuestionList questionList;
+	private int questionCounter;
+	
+	
+	
 
 	private String sentence;
 	private String translation;
 	private List<String> answers;
-	
-	String correctAnswerString;
-	
+	private String correctAnswerString;
 	private int currentSentenceCounter = 0;
 	private int gameMode = 0;
-	
+
 	// only for testing
 	private List<String> sentences;
 	private List<String> translations;
 	private List<Integer> correctAnswer;
 	private List<List<String>> answersList;
 	private List<String> spokenInList;
+
+	
+	@Override
+	protected void doGet (HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+	
+	}	
+	/**
+	 * Aufruf von index.html: hole Fragen und lade die erste in die Seite.
+	 */
+	@Override
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		String numQuestions = request.getParameter("numberOfQuestions");
+		try {
+			String showQuestion = showQuestion(Integer.parseInt(numQuestions));
+			this.questionList = XMLUtilities.convertFromXML(showQuestion);
+			this.questionCounter = 0;
+			setQuestion(questionList.getQuestion(questionCounter));
+			request.setAttribute("question", getQuestion());
+			request.setAttribute("questionCounter", questionCounter);
+			
+			
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		RequestDispatcher view = request.getRequestDispatcher("/quiz.jsp");
+		view.forward(request, response);
+		
+	}
+
+	/**
+	 * Queries the server (through a URL) for a question and displays it on the
+	 * screen (needs that Tomcat is running locally) TODO Make this fancier
+	 * 
+	 * @throws Exception
+	 */
+	public String showQuestion(int numberOfQuestions)
+			throws Exception {
+
+		StringBuilder sb = new StringBuilder();
+		// URL questionURL = new
+		// URL("http://localhost:8080/XML-Project/quiz/hello/welcome");
+		URL welcomeURL = new URL(
+				"http://localhost:8080/XML-Project/quiz/hello/question");
+
+		BufferedReader br = new BufferedReader(new InputStreamReader(
+				welcomeURL.openStream(), "UTF-8"));
+
+		ArrayList<String> lines = new ArrayList<String>();
+		String inputLine;
+
+		while ((inputLine = br.readLine()) != null)
+			sb.append(inputLine);
+
+		br.close();
+
+		return sb.toString();
+
+		// Testing connection
+		// URLConnection questionConn = welcomeURL.openConnection();
+		// questionConn.connect();
+
+	}
+
+	/********************
+	 * GETTER UND SETTER
+	 ********************/
 
 	public List<String> getSpokenInList() {
 		return spokenInList;
@@ -32,82 +123,13 @@ public class QuestionDisplayer {
 		this.spokenInList = spokenInList;
 	}
 
-	public void test() {
-		// Test
-		sentences = new ArrayList<String>();
-		sentences.add("Tai ’ deing o min a.");
-		sentences.add("Il pleut.");
-		
-		translations = new ArrayList<String>();
-		translations.add("We are all here.");
-		translations.add("It is raining.");
-
-		answersList = new ArrayList<List<String>>();
-		answers = new ArrayList<String>();
-		answers.add("Wersing");
-		answers.add("Teiwa");
-		answers.add("Abui");
-		answers.add("Kamang");
-		answersList.add(answers);
-		
-		answers = new ArrayList<String>();
-		answers.add("English");
-		answers.add("Czech");
-		answers.add("French");
-		answers.add("Swedish");
-		answersList.add(answers);
-
-		correctAnswer = new ArrayList<Integer>();
-		correctAnswer.add(1);
-		correctAnswer.add(3);
-		
-		spokenInList = new ArrayList<String>();
-		spokenInList.add("Indonesia");
-		spokenInList.add("Malaysia");
-
-		// Test Ende
-	}
-
-	/**
-	 * Queries the server (through a URL) for a question and displays it on the
-	 * screen (needs that Tomcat is running locally) TODO Make this fancier
-	 * 
-	 * @throws Exception
-	 */
-	public ArrayList<String> showQuestion(int numberOfQuestions)
-			throws Exception {
-
-		// URL questionURL = new
-		// URL("http://localhost:8080/XML-Project/quiz/hello/welcome");
-		URL welcomeURL = new URL(
-				"http://localhost:8080/XML-Project/quiz/hello/question");
-
-		BufferedReader br = new BufferedReader(new InputStreamReader(
-				welcomeURL.openStream()));
-
-		ArrayList<String> lines = new ArrayList<String>();
-		String inputLine;
-
-		while ((inputLine = br.readLine()) != null)
-			lines.add(inputLine);
-
-		br.close();
-
-		return lines;
-
-		// Testing connection
-		// URLConnection questionConn = welcomeURL.openConnection();
-		// questionConn.connect();
-
-	}
-
-	public String getCurrentSentenceCounter() {
-		return "" + (currentSentenceCounter + 1);
-	}
-
-	public void setCurrentSentenceCounter(String counter) {
-		this.currentSentenceCounter = Integer.parseInt(counter);
-	}
+//	public String getCurrentSentenceCounter() {
+//		return "" + (currentSentenceCounter + 1);
+//	}
+//
+//	public void setCurrentSentenceCounter(String counter) {
+//		this.currentSentenceCounter = Integer.parseInt(counter);
+//	}
 
 	public String getGameMode() {
 		return "" + (gameMode);
@@ -116,7 +138,7 @@ public class QuestionDisplayer {
 	public void setGameMode(String counter) {
 		this.gameMode = Integer.parseInt(counter);
 	}
-	
+
 	public Integer getCorrectAnswer() {
 		return correctAnswer.get(currentSentenceCounter);
 	}
@@ -146,20 +168,83 @@ public class QuestionDisplayer {
 	}
 
 	public String getCorrectAnswerString() {
-		return answersList.get(currentSentenceCounter).get(correctAnswer.get(currentSentenceCounter));
+		return answersList.get(currentSentenceCounter).get(
+				correctAnswer.get(currentSentenceCounter));
 	}
 
 	public void setCorrectAnswerString(String correctAnswerString) {
 		this.correctAnswerString = correctAnswerString;
 	}
+
+	public XMLQuestion getQuestion() {
+		return question;
+	}
+
+	public int getQuestionCounter() {
+		return questionCounter;
+	}
 	
+	public void setQuestionCounter(int questionCounter) {
+		this.questionCounter = questionCounter;
+	}
+	
+	public void setQuestion(XMLQuestion question) {
+		this.question = question;
+	}
 
-	/**
-	 * Main for testing
-	 * 
-	 * @param args
-	 */
-	public static void main(String[] args) {
+	public XMLQuestionList getQuestionList() {
+		return questionList;
+	}
 
+	public void setQuestionList(XMLQuestionList questionList) {
+		this.questionList = questionList;
+	}
+	
+	/******************
+	 * TEST
+	 * @throws Exception 
+	 ******************/
+	public static void main(String[] args) throws Exception {
+//		QuestionDisplayer q = new QuestionDisplayer();
+//		ArrayList<String> obj = q.showQuestion(2);
+//		for (String string : obj) {
+//			System.out.println(string);
+//		}
+	}
+
+	public void test() {
+		// Test
+		sentences = new ArrayList<String>();
+		sentences.add("Tai ’ deing o min a.");
+		sentences.add("Il pleut.");
+
+		translations = new ArrayList<String>();
+		translations.add("We are all here.");
+		translations.add("It is raining.");
+
+		answersList = new ArrayList<List<String>>();
+		answers = new ArrayList<String>();
+		answers.add("Wersing");
+		answers.add("Teiwa");
+		answers.add("Abui");
+		answers.add("Kamang");
+		answersList.add(answers);
+
+		answers = new ArrayList<String>();
+		answers.add("English");
+		answers.add("Czech");
+		answers.add("French");
+		answers.add("Swedish");
+		answersList.add(answers);
+
+		correctAnswer = new ArrayList<Integer>();
+		correctAnswer.add(1);
+		correctAnswer.add(3);
+
+		spokenInList = new ArrayList<String>();
+		spokenInList.add("Indonesia");
+		spokenInList.add("Malaysia");
+
+		// Test Ende
 	}
 }

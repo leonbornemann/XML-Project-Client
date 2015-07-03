@@ -104,17 +104,17 @@ img.titleDisplay {
 	color: darkblue;
 }
 
-object {
-	background-color: white;
+.svgObject {
+	background: white !important;
 }
 
 
 
 .land
-			{
-				fill: #CCC;
-				fill-opacity: 1;
-				stroke:white;
-				stroke-opacity: 1;
-				stroke-width:0.5;
-			}
+{
+	fill: #CCC;
+	fill-opacity: 1;
+	stroke:white;
+	stroke-opacity: 1;
+	stroke-width:0.5;
+}
