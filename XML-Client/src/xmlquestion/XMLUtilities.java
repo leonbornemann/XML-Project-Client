@@ -21,7 +21,7 @@ public class XMLUtilities {
      */
     public static String questionListToXML(XMLQuestionList questionList){
         
-        XStream xstream = new XStream(new DomDriver());
+        XStream xstream = new XStream(new DomDriver("UTF-8"));
         xstream.setMode(XStream.ID_REFERENCES);
         xstream.alias("sentence", Sentence.class);
         xstream.alias("answers", Answers.class);
@@ -40,7 +40,7 @@ public class XMLUtilities {
      */
     public static XMLQuestionList convertFromXML(String XMLString) {
         XMLQuestionList ql = null;
-        XStream xstream = new XStream(new DomDriver());
+        XStream xstream = new XStream(new DomDriver("UTF-8"));
         xstream.setMode(XStream.ID_REFERENCES);
         xstream.alias("sentence", Sentence.class);
         xstream.alias("answers", Answers.class);
