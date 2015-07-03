@@ -15,6 +15,10 @@ public class XMLQuestionList {
         return true;
     }
     
+    public XMLQuestion getQuestion(int index){
+    	return this.questionList.get(index);
+    }
+    
     /**
      * Removes a question from the list
      * @param index
