@@ -9,16 +9,12 @@
 <script type="text/javascript" src="jquery-1.11.3.js"></script>
 <style>
 body {
-	overflow: auto;
-	width: auto;
-	height: auto;
+	overflow-x: hidden;
 }
 </style>
 </head>
 <body bgcolor="#3981D9">
-	<p>
-		<img class="titleDisplay" src="img/header.gif" alt="title">
-	</p>
+	<img class="titleDisplay" src="img/header.gif" alt="title">
 
 	<div class="mapDisplay">
 		<div class="containerDisplay">
@@ -35,7 +31,7 @@ body {
 							<form action="questionDisplayer" method="POST">
 								<input type="hidden" value="index" name="status">
 								<button class="myButton" name="numberOfQuestions" type="submit" value="5">5 sentences</button>
-								<br>
+								<br><br><br>
 								<button class="myButton" name="numberOfQuestions" type="submit"
 									value="10">10 sentences</button>
 							</form>

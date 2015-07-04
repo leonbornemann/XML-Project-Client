@@ -2,7 +2,7 @@ img.titleDisplay {
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
-	max-width: 40%;
+	max-width: 32%;
 	top: 1%;
 }
 
@@ -21,7 +21,7 @@ img.titleDisplay {
 	margin-left: auto;
 	margin-right: auto;
 	display: block;
-	background: url(img/box70.png) no-repeat;
+	background: url(img/box80.png) no-repeat;
 }
 
 .mapDisplay .containerDisplayQuiz {

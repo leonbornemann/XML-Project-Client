@@ -10,9 +10,7 @@
 <script type="text/javascript" src="jquery-1.11.3.js"></script>
 <style>
 body {
-	overflow: auto;
-	width: auto;
-	height: auto;
+	overflow-x: hidden;
 }
 </style>
 </head>
@@ -21,9 +19,7 @@ body {
 		int correctAnswers = ((Integer)request.getAttribute("correctAnswerCounter")).intValue();
 		int questionCounter = ((Integer)request.getAttribute("questionCounter")).intValue();
 	%>
-	<p>
-		<img class="titleDisplay" src="img/header.gif" alt="title">
-	</p>
+	<img class="titleDisplay" src="img/header.gif" alt="title">
 
 	<div class="mapDisplay">
 		<div class="containerDisplay">

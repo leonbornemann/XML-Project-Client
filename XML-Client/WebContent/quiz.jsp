@@ -13,9 +13,7 @@
 <script src="scripts.js" type="text/javascript"></script>
 <style>
 body {
-	overflow: auto;
-	width: auto;
-	height: auto;
+	overflow-x: hidden;
 }
 </style>
 </head>
@@ -64,11 +62,7 @@ body {
 	answerList = <%=sb2.toString()%>;
 	</script>		
 
-
-	<p>
-		<img class="titleDisplay" src="img/header.gif" alt="title">
-	</p>
-
+	<img class="titleDisplay" src="img/header.gif" alt="title">
 	<div class="mapDisplay">
 		<div class="containerDisplayQuiz">
 			<table style="margin-left: 25px;">
