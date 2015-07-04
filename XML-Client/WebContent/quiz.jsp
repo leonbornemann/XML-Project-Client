@@ -89,7 +89,7 @@ body {
 								%>
 								<li>
 									<div rel="dbp-owl:spokenIn"
-										resource="http://dbpedia.org/resource/<%=country.getName()%>">
+										resource="http://dbpedia.org/resource/<%=country.getNameWithUnderlines()%>">
 										<font class="textFont" style="padding-left: 30px;"><%=country.getName()%></font>
 									</div>
 								</li>

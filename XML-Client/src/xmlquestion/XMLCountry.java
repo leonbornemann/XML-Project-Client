@@ -5,8 +5,10 @@ public class XMLCountry {
     private String name;
     private String lattitude;
     private String longitude;
+    private String nameWithUnderlines;
     
-    public XMLCountry(String name, String lattitude, String longitude){
+
+	public XMLCountry(String name, String lattitude, String longitude){
         this.setName(name);
         this.setLattitude(lattitude);
         this.setLongitude(longitude);
@@ -47,6 +49,15 @@ public class XMLCountry {
     public void setLongitude(String longitude) {
         this.longitude = longitude;
     }
+    
+    public String getNameWithUnderlines() {
+		return name.replace(" ", "_");
+	}
+
+	public void setNameWithUnderlines(String nameWithUnderlines) {
+		this.nameWithUnderlines = nameWithUnderlines;
+	}
+    
     
     @Override
     public String toString(){
