@@ -36,13 +36,6 @@ public class QuestionDisplayer extends HttpServlet {
 	private int currentSentenceCounter = 0;
 	private int gameMode = 0;
 
-	// only for testing
-	private List<String> sentences;
-	private List<String> translations;
-	private List<Integer> correctAnswer;
-	private List<List<String>> answersList;
-	private List<String> spokenInList;
-	
 	private int correctAnswerCounter;
 
 	@Override
@@ -135,48 +128,21 @@ public class QuestionDisplayer extends HttpServlet {
 	public String showQuestion(int numberOfQuestions) throws Exception {
 
 		StringBuilder sb = new StringBuilder();
-		// URL questionURL = new
-		// URL("http://localhost:8080/XML-Project/quiz/hello/welcome");
 		URL welcomeURL = new URL(
 				"http://localhost:8080/XML-Project/quiz/hello/question"+numberOfQuestions);
-
 		BufferedReader br = new BufferedReader(new InputStreamReader(
 				welcomeURL.openStream(), "UTF-8"));
-
 		String inputLine;
-
 		while ((inputLine = br.readLine()) != null)
 			sb.append(inputLine);
 
 		br.close();
-
 		return sb.toString();
-
-		// Testing connection
-		// URLConnection questionConn = welcomeURL.openConnection();
-		// questionConn.connect();
-
 	}
 
 	/********************
 	 * GETTER UND SETTER
 	 ********************/
-
-	public List<String> getSpokenInList() {
-		return spokenInList;
-	}
-
-	public void setSpokenInList(List<String> spokenInList) {
-		this.spokenInList = spokenInList;
-	}
-
-	// public String getCurrentSentenceCounter() {
-	// return "" + (currentSentenceCounter + 1);
-	// }
-	//
-	// public void setCurrentSentenceCounter(String counter) {
-	// this.currentSentenceCounter = Integer.parseInt(counter);
-	// }
 
 	public String getGameMode() {
 		return "" + (gameMode);
@@ -186,37 +152,16 @@ public class QuestionDisplayer extends HttpServlet {
 		this.gameMode = Integer.parseInt(counter);
 	}
 
-	public Integer getCorrectAnswer() {
-		return correctAnswer.get(currentSentenceCounter);
-	}
-
-	public String getSentence() {
-		return sentences.get(currentSentenceCounter);
-	}
-
 	public void setSentence(String sentence) {
 		this.sentence = sentence;
-	}
-
-	public String getTranslation() {
-		return translations.get(currentSentenceCounter);
 	}
 
 	public void setTranslation(String translation) {
 		this.translation = translation;
 	}
 
-	public List<String> getAnswers() {
-		return answersList.get(currentSentenceCounter);
-	}
-
 	public void setAnswers(List<String> answers) {
 		this.answers = answers;
-	}
-
-	public String getCorrectAnswerString() {
-		return answersList.get(currentSentenceCounter).get(
-				correctAnswer.get(currentSentenceCounter));
 	}
 
 	public void setCorrectAnswerString(String correctAnswerString) {

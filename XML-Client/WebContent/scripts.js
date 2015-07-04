@@ -16,8 +16,13 @@ $(document).ready(function() {
 	
 	// fill answer buttons randomized
 	for (var i=1;i<=4;i++){
-	    		$("#answerButton"+i).attr('value', answerList[i-1]);
-	    		$("#answerButton"+i).html(answerList[i-1]);
+	    		var answer = answerList[i-1];
+	    		$("#answerButton"+i).attr('value', answer);
+	    		$("#answerButton"+i).html(answer);
+	    		if (answer.length > 15)
+	    			$("#answerButton"+i).attr('style', "font-size: 14px !important;");
+	    		if (answer.length > 30)
+	    			$("#answerButton"+i).attr('style', "font-size: 12px !important;");
 	    	
 	}
 	
