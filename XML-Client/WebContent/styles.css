@@ -117,6 +117,19 @@ img.titleDisplay {
 	width:580px;
 }
 
+.hideTippImg {
+	display:none;
+}
+
+.hideTipp {
+	display:none;
+}
+
+.tippImg {
+	background: transparent;
+	border: none;
+	cursor:pointer;
+}
 
 .land
 {

@@ -70,7 +70,12 @@ body {
 				<tr>
 					<td class="tableLeftSide firstRow"><font
 						class="headlineTextFont"><b>Sentence <%=questionCounter%></b></font></td>
-					<td width="570px" style="padding-left: 30px;"><font
+						
+					<td rowspan="8" style="padding-left:20%">
+						<button id="tippImg" title="Do you need a hint?" class="tippImg"><img src="img/gluehbirne.png"/></button> 
+					</td>	
+						
+					<td width="570px" style="padding-left: 30px;" class="hideTipp"><font
 						class="textFont">The sought language is spoken in the
 							following countries:</font></td>
 				</tr>
@@ -79,7 +84,7 @@ body {
 						class="textFont textFontSentence"><b>Which language is it?<br><br><%=question.getQuestionSentence().getOriginal()%></b></font>
 						<p>
 							<font class="textFont">Translation: <%=question.getQuestionSentence().getTranslation()%></font></td>
-					<td height="130px">
+					<td height="130px" class="hideTipp">
 						<div
 							about="http://dbpedia.org/resource/<%=question.getQuestionAnswers().getRight() + "_language"%>>" style="padding-left:25px;">
 							<div id="countries" class="scrollBar">
@@ -102,7 +107,7 @@ body {
 				</tr>
 				<tr>
 					<!-- empty -->			
-					<td rowspan="6" id="svgMap" style="padding-left: 26px;">
+					<td rowspan="6" id="svgMap" style="padding-left: 26px;" class="hideTipp">
 					<object data="img/worldHigh.svg" class="svg" type="image/svg+xml" id="svgObject">
 					</object>
 				</tr>

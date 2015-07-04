@@ -20,9 +20,9 @@ $(document).ready(function() {
 	    		$("#answerButton"+i).attr('value', answer);
 	    		$("#answerButton"+i).html(answer);
 	    		if (answer.length > 15)
-	    			$("#answerButton"+i).attr('style', "font-size: 14px !important;");
+	    			$("#answerButton"+i).attr('style', 'font-size: 14px !important;');
 	    		if (answer.length > 30)
-	    			$("#answerButton"+i).attr('style', "font-size: 12px !important;");
+	    			$("#answerButton"+i).attr('style', 'font-size: 12px !important;');
 	    	
 	}
 	
@@ -81,6 +81,11 @@ $(document).ready(function() {
 		disableButtons();
 	});
 	
+	$('#tippImg').click(function(){
+		$(this).attr('class','hideTippImg');
+		$('td[class~="hideTipp"]').removeClass("hideTipp");
+	});
+	
 
 	// when the svg DOM is loaded, we can change colors
 	$(window).load(function(){
@@ -95,5 +100,6 @@ $(document).ready(function() {
 	    	}
 	    	
 	});
-
+	
+	
 });
