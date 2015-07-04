@@ -62,12 +62,12 @@ public class QuestionDisplayer extends HttpServlet {
 
 			numQuestions = Integer.parseInt(request.getParameter("numberOfQuestions"));
 			try {
-				XMLQuestion questions=getQuestion();
 				String showQuestion = showQuestion(numQuestions);
 				this.questionList = XMLUtilities.convertFromXML(showQuestion);
 				this.questionCounter = 0;
 				this.correctAnswerCounter = 0;
 				setQuestion(questionList.getQuestion(questionCounter));
+				XMLQuestion questions=getQuestion();
 				request.setAttribute("question", questions);
 				request.setAttribute("questionCounter", questionCounter+1);
 				request.setAttribute("numQuestion", numQuestions);
@@ -116,12 +116,12 @@ public class QuestionDisplayer extends HttpServlet {
 	}
 	
 	
-	private ArrayList<String> createRandomAnswerList(XMLQuestion question){
+	private ArrayList<String> createRandomAnswerList(XMLQuestion questions){
 		ArrayList<String> answerList = new ArrayList<String>();
-		answerList.add(question.getQuestionAnswers().getRight());
-		answerList.add(question.getQuestionAnswers().getWrong1());
-		answerList.add(question.getQuestionAnswers().getWrong2());
-		answerList.add(question.getQuestionAnswers().getWrong3());
+		answerList.add(questions.getQuestionAnswers().getRight());
+		answerList.add(questions.getQuestionAnswers().getWrong1());
+		answerList.add(questions.getQuestionAnswers().getWrong2());
+		answerList.add(questions.getQuestionAnswers().getWrong3());
 		Collections.shuffle(answerList);
 		return answerList;
 	}
