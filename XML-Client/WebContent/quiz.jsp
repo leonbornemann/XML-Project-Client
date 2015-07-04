@@ -81,7 +81,8 @@ body {
 							<font class="textFont">Translation: <%=question.getQuestionSentence().getTranslation()%></font></td>
 					<td height="130px">
 						<div
-							about="http://dbpedia.org/resource/<%=question.getQuestionAnswers().getRight() + "_language"%>>">
+							about="http://dbpedia.org/resource/<%=question.getQuestionAnswers().getRight() + "_language"%>>" style="padding-left:25px;">
+							<div id="countries" class="scrollBar">
 							<ul>
 								<%
 									for (XMLCountry country : question.getCountryList()) {
@@ -96,6 +97,7 @@ body {
 									}
 								%>
 							</ul>
+							</div>
 						</div>
 				</tr>
 				<tr>

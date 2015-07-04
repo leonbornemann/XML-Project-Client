@@ -111,6 +111,12 @@ img.titleDisplay {
 }
 
 
+.scrollBar {
+	overflow:scroll;
+	height:109px; 
+	width:580px;
+}
+
 
 .land
 {
