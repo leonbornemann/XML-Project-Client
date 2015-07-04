@@ -86,6 +86,7 @@ $(document).ready(function() {
 	$(window).load(function(){
 		// get the object and withing the svg search for DE
 	    	var a = document.getElementById("svgObject");
+	    	a.setAttribute("class", "svgObject");
 // var svgDoc = a.contentDocument;
 	    	
 	    	for (var i=0; i<countries.length; i++){

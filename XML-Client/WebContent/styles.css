@@ -105,7 +105,9 @@ img.titleDisplay {
 }
 
 .svgObject {
-	background: white !important;
+	background: white;
+	width: 580px;
+	height: 300px;
 }
 
 

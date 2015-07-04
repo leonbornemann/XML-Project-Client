@@ -101,7 +101,7 @@ body {
 				<tr>
 					<!-- empty -->			
 					<td rowspan="6" id="svgMap" style="padding-left: 26px;">
-					<object data="img/worldHigh.svg" class="svg" height="300px" width="580px" type="image/svg+xml" id="svgObject">
+					<object data="img/worldHigh.svg" class="svg" type="image/svg+xml" id="svgObject">
 					</object>
 				</tr>
 				<tr>
