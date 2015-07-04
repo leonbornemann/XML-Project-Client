@@ -5,9 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -28,13 +26,6 @@ public class QuestionDisplayer extends HttpServlet {
 	private XMLQuestion question;
 	private XMLQuestionList questionList;
 	private int questionCounter;
-
-	private String sentence;
-	private String translation;
-	private List<String> answers;
-	private String correctAnswerString;
-	private int currentSentenceCounter = 0;
-	private int gameMode = 0;
 
 	private int correctAnswerCounter;
 
@@ -59,8 +50,8 @@ public class QuestionDisplayer extends HttpServlet {
 				this.questionList = XMLUtilities.convertFromXML(showQuestion);
 				this.questionCounter = 0;
 				this.correctAnswerCounter = 0;
-				setQuestion(questionList.getQuestion(questionCounter));
-				XMLQuestion questions=getQuestion();
+				this.question = questionList.getQuestion(questionCounter);
+				XMLQuestion questions=question;
 				request.setAttribute("question", questions);
 				request.setAttribute("questionCounter", questionCounter+1);
 				request.setAttribute("numQuestion", numQuestions);
@@ -83,9 +74,9 @@ public class QuestionDisplayer extends HttpServlet {
 				this.correctAnswerCounter++;
 			}
 			this.questionCounter++;
-			setQuestion(questionList.getQuestion(questionCounter));
+			this.question = questionList.getQuestion(questionCounter);
 			
-			XMLQuestion questions=getQuestion();
+			XMLQuestion questions=question;
 			request.setAttribute("question", questions);
 			request.setAttribute("questionCounter", questionCounter+1);
 			request.setAttribute("numQuestion", numQuestions);
@@ -140,56 +131,6 @@ public class QuestionDisplayer extends HttpServlet {
 		return sb.toString();
 	}
 
-	/********************
-	 * GETTER UND SETTER
-	 ********************/
 
-	public String getGameMode() {
-		return "" + (gameMode);
-	}
-
-	public void setGameMode(String counter) {
-		this.gameMode = Integer.parseInt(counter);
-	}
-
-	public void setSentence(String sentence) {
-		this.sentence = sentence;
-	}
-
-	public void setTranslation(String translation) {
-		this.translation = translation;
-	}
-
-	public void setAnswers(List<String> answers) {
-		this.answers = answers;
-	}
-
-	public void setCorrectAnswerString(String correctAnswerString) {
-		this.correctAnswerString = correctAnswerString;
-	}
-
-	public XMLQuestion getQuestion() {
-		return question;
-	}
-
-	public int getQuestionCounter() {
-		return questionCounter;
-	}
-
-	public void setQuestionCounter(int questionCounter) {
-		this.questionCounter = questionCounter;
-	}
-
-	public void setQuestion(XMLQuestion question) {
-		this.question = question;
-	}
-
-	public XMLQuestionList getQuestionList() {
-		return questionList;
-	}
-
-	public void setQuestionList(XMLQuestionList questionList) {
-		this.questionList = questionList;
-	}
 
 }
