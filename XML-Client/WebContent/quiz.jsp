@@ -71,8 +71,10 @@ body {
 					<td class="tableLeftSide firstRow"><font
 						class="headlineTextFont"><b>Sentence <%=questionCounter%></b></font></td>
 						
-					<td rowspan="8" style="padding-left:20%">
+					<td rowspan="8" style="padding-left:20%" id="tippImgTD">
+					<div style="width:500px; height: 500px;">
 						<button id="tippImg" title="Do you need a hint?" class="tippImg"><img src="img/gluehbirne.png"/></button> 
+					</div>
 					</td>	
 						
 					<td width="570px" style="padding-left: 30px;" class="hideTipp"><font
@@ -108,8 +110,10 @@ body {
 				<tr>
 					<!-- empty -->			
 					<td rowspan="6" id="svgMap" style="padding-left: 26px;" class="hideTipp">
+					<div style="width:500px;height:328px;">
 					<object data="img/worldHigh.svg" class="svg" type="image/svg+xml" id="svgObject">
 					</object>
+					</div>
 				</tr>
 				<tr>
 					<td class="tableLeftSide">
@@ -134,6 +138,7 @@ body {
 				</tr>
 				<tr>
 					<td class="tableLeftSide">
+						<div style="height:37px; width:350px;">
 						<form id="sunnaryForm" action="questionDisplayer" method="POST">
 							<input type="hidden" name="status" value="summary">
 								<button class="myButtonInvisible" id="summaryButton" name="summary"
@@ -144,6 +149,7 @@ body {
 							<button class="myButtonInvisible" id="nextSentenceButton" name="givenAnswer"
 								type="submit" value="Next Sentence">Next Sentence</button>
 						</form>
+						</div>
 					</td>
 				</tr>
 			</table>

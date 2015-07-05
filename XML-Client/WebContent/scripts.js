@@ -82,7 +82,7 @@ $(document).ready(function() {
 	});
 	
 	$('#tippImg').click(function(){
-		$(this).attr('class','hideTippImg');
+		$('#tippImgTD').attr('class','hideTippImg');
 		$('td[class~="hideTipp"]').removeClass("hideTipp");
 	});
 	
