@@ -28,7 +28,7 @@ public class XMLCountry {
 
     public String getName() {
     	if (name.contains("%C3%A7")){
-    		name = name.replace("%C3%A7", "c");
+    		name = name.replace("%C3%A7", "ç");
     	}
         return name;
     }

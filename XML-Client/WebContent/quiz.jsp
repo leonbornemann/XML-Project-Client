@@ -65,7 +65,7 @@ body {
 	<img class="titleDisplay" src="img/header.gif" alt="title">
 	<div class="mapDisplay">
 		<div class="containerDisplayQuiz">
-			<table style="margin-left: 25px;">
+			<table border=1 style="margin-left: 25px;" >
 
 				<tr>
 					<td class="tableLeftSide firstRow"><font
@@ -111,8 +111,7 @@ body {
 					<!-- empty -->			
 					<td rowspan="6" id="svgMap" style="padding-left: 26px;" class="hideTipp">
 					<div style="width:500px;height:328px;">
-					<object data="img/worldHigh.svg" class="svg" type="image/svg+xml" id="svgObject">
-					</object>
+						<object data="img/worldHigh.svg" class="svg" type="image/svg+xml" id="svgObject"></object>
 					</div>
 				</tr>
 				<tr>

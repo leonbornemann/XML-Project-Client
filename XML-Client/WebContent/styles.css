@@ -2,6 +2,12 @@ html {
 	height: 90%	
 }
 	
+	
+	
+td, table {
+	border-color: transparent;
+}
+	
 img.titleDisplay {
 	display: block;
 	margin-left: auto;
