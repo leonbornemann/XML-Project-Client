@@ -82,10 +82,11 @@ body {
 							following countries:</font></td>
 				</tr>
 				<tr>
-					<td class="tableLeftSide secondRow" rowspan="2"><font
-						class="textFont textFontSentence"><b>Which language is it?<br><br><%=question.getQuestionSentence().getOriginal()%></b></font>
+					<td class="tableLeftSide secondRow" rowspan="2"><font class="textFont textFontSentence">
+					<b>Which language is it?<br><br><font id="originalSentence"
+						class="textFont textFontSentence"><%=question.getQuestionSentence().getOriginal()%></font></b></font>
 						<p>
-							<font class="textFont">Translation: <%=question.getQuestionSentence().getTranslation()%></font></td>
+							<font class="textFont" id="translationSentence">Translation: <%=question.getQuestionSentence().getTranslation()%></font></td>
 					<td height="130px" class="hideTipp">
 						<div
 							about="http://dbpedia.org/resource/<%=question.getQuestionAnswers().getRight() + "_language"%>>" style="padding-left:25px;">

@@ -13,16 +13,31 @@ function disableButtons(){
 }
 
 $(document).ready(function() {
+	// change font size if texts are too long
+	var originalSentence = $("#originalSentence").text();
+	if (originalSentence.length > 60)
+		$("#originalSentence").attr('style', 'font-size: 17px !important;');	
+	
+	var translationSentence = $("#translationSentence").text();
+	if (translationSentence.length > 100)
+		$("#translationSentence").attr('style', 'font-size: 15px !important;');
+	else if (translationSentence.length > 80)
+		$("#translationSentence").attr('style', 'font-size: 16px !important;');	
+	else if (translationSentence.length > 60)
+		$("#translationSentence").attr('style', 'font-size: 17px !important;');	
 	
 	// fill answer buttons randomized
 	for (var i=1;i<=4;i++){
 	    		var answer = answerList[i-1];
 	    		$("#answerButton"+i).attr('value', answer);
 	    		$("#answerButton"+i).html(answer);
-	    		if (answer.length > 15)
-	    			$("#answerButton"+i).attr('style', 'font-size: 14px !important;');
-	    		if (answer.length > 30)
+	    		if (answer.length > 37)
+	    			$("#answerButton"+i).attr('style', 'font-size: 10px !important;');
+	    		else if (answer.length > 30)
 	    			$("#answerButton"+i).attr('style', 'font-size: 12px !important;');
+	    		else if (answer.length > 15)
+	    			$("#answerButton"+i).attr('style', 'font-size: 14px !important;');
+
 	    	
 	}
 	
