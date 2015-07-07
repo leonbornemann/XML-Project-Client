@@ -82,24 +82,29 @@ $(document).ready(function() {
 	});
 	
 	$('#tippImg').click(function(){
+		loadTipp();
 		$('#tippImgTD').attr('class','hideTippImg');
 		$('td[class~="hideTipp"]').removeClass("hideTipp");
 	});
 	
 
 	// when the svg DOM is loaded, we can change colors
-	$(window).load(function(){
+//	$(window).load(function(){
 		// get the object and withing the svg search for DE
+	function loadTipp(){
 	    	var a = document.getElementById("svgObject");
 	    	a.setAttribute("class", "svgObject");
 // var svgDoc = a.contentDocument;
 	    	
 	    	for (var i=0; i<countries.length; i++){
 	    		var path = a.getElementById(countries[i]);
-	    		path.setAttribute("style","fill:red");
+	    		if (path != null){
+	    			path.setAttribute("style","fill:red");
+	    		}
 	    	}
+	}
 	    	
-	});
+//	});
 	
 	
 });
