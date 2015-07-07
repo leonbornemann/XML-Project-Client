@@ -27,6 +27,7 @@ public class Sentence {
     }
 
     public String getOriginal() {
+    	original = original.replace("?", "").replace("=", "").replace("+", "");
         return original;
     }
 
